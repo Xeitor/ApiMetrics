@@ -5,12 +5,18 @@ import android.os.Bundle
 import android.view.View
 import android.widget.TextView
 import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.Observer
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.wisproapi.retrofit_models.JsonPayments
 import com.example.wisproapi.retrofit_models.Payment
+import com.example.wisproapi.retrofit_models.PaymentObject
 import com.example.wisproapi.retrofit_models.ServiceBuilder
+import com.example.wisproapi.viewmodels.ViewModelTest
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -29,44 +35,26 @@ class MainActivity : AppCompatActivity() {
         toolbar.title = "Wispro Api"
         setSupportActionBar(toolbar)
 
-//        val retrofit = Retrofit.Builder().baseUrl("https://www.cloud.wispro.co")
-//            .addConverterFactory(GsonConverterFactory.create())
-//            .build()
-//
-//        val jsonInvoices:JsonPayments = retrofit.create(
-//            JsonPayments::class.java
-//        )
-//        val listCall: Call<Payment> = jsonInvoices.getPostsV2(2, 100)
-
         val request = ServiceBuilder.buildService(JsonPayments::class.java)
-        val listCallV2: Call<Payment> = request.getPostsV2(2,100, "64dc19d7-1227-4741-9fe3-de3f476aa203")
+        val listCallV2: Call<Payment> =
+            request.getPostsV2(2, 100, "64dc19d7-1227-4741-9fe3-de3f476aa203")
 
         textView = findViewById(R.id.statuscode)
 
-        listCallV2.enqueue(object : Callback<Payment> {
-            override fun onResponse(call: Call<Payment>?, response: Response<Payment>
-            ) {
-                if (!response.isSuccessful) {
-                    textView?.setText("Code " + response.code())
-                    return
-                }
-                val payments = response.body()
+        val model: ViewModelTest by viewModels()
 
-                var content = "${payments.status}"
+//        var live_data: MutableLiveData<PaymentObject> = model.create_payments_request()
+        val textViewV2 = textView
 
-                textView?.append(content)
-
-                // set up the RecyclerView
-                val recyclerView: RecyclerView = findViewById(R.id.rvAnimals)
-                recyclerView.layoutManager = LinearLayoutManager(this@MainActivity)
-                adapter = MyRecyclerViewAdapter(this@MainActivity, payments.data)
-                recyclerView.adapter = adapter
-            }
-
-            override fun onFailure(call: Call<Payment>, t: Throwable?) {
-                textView?.setText("Error")
-            }
+        model.getUser()
+        model.live_response?.observe(this, Observer<Payment> { new ->
+            textViewV2?.append(model.live_response?.value?.data?.get(0)?.transaction_kind)
         })
+
+//        val recyclerView: RecyclerView = findViewById(R.id.rvAnimals)
+//        recyclerView.layoutManager = LinearLayoutManager(this@MainActivity)
+//        adapter = MyRecyclerViewAdapter(this@MainActivity, paymentss)
+//        recyclerView.adapter = adapter
     }
 
     fun onItemClick(view: View?, position: Int) {
@@ -115,3 +103,38 @@ class MainActivity : AppCompatActivity() {
 //        });
 //    }
 //}
+
+// Retrofit creation
+//        val retrofit = Retrofit.Builder().baseUrl("https://www.cloud.wispro.co")
+//            .addConverterFactory(GsonConverterFactory.create())
+//            .build()
+//
+//        val jsonInvoices:JsonPayments = retrofit.create(
+//            JsonPayments::class.java
+//        )
+//        val listCall: Call<Payment> = jsonInvoices.getPostsV2(2, 100)
+
+//        listCallV2.enqueue(object : Callback<Payment> {
+//            override fun onResponse(call: Call<Payment>?, response: Response<Payment>
+//            ) {
+//                if (!response.isSuccessful) {
+//                    textView?.setText("Code " + response.code())
+//                    return
+//                }
+//                val payments = response.body()
+//
+//                var content = "${payments.status}"
+//
+//                textView?.append(content)
+//
+//                // set up the RecyclerView
+//                val recyclerView: RecyclerView = findViewById(R.id.rvAnimals)
+//                recyclerView.layoutManager = LinearLayoutManager(this@MainActivity)
+//                adapter = MyRecyclerViewAdapter(this@MainActivity, payments.data)
+//                recyclerView.adapter = adapter
+//            }
+//
+//            override fun onFailure(call: Call<Payment>, t: Throwable?) {
+//                textView?.setText("Error")
+//            }
+//        })

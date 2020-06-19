@@ -1,8 +1,9 @@
 package com.example.wisproapi.retrofit_models
+import androidx.lifecycle.LiveData
 import com.google.gson.annotations.SerializedName
 
 class Payment: BaseRequest() {
-    @SerializedName("data") val data: List<PaymentObject> = ArrayList()
+    @SerializedName("data") val data: List<PaymentObject>? = null
 }
 class PaymentObject {
     @SerializedName("id")  val id: String? = null
