@@ -31,30 +31,30 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        //Toolbar
         val toolbar: Toolbar = findViewById<Toolbar>(R.id.my_toolbar)
         toolbar.title = "Wispro Api"
         setSupportActionBar(toolbar)
 
-        val request = ServiceBuilder.buildService(JsonPayments::class.java)
-        val listCallV2: Call<Payment> =
-            request.getPostsV2(2, 100, "64dc19d7-1227-4741-9fe3-de3f476aa203")
-
+        //Testing textview
         textView = findViewById(R.id.statuscode)
-
-        val model: ViewModelTest by viewModels()
-
-//        var live_data: MutableLiveData<PaymentObject> = model.create_payments_request()
         val textViewV2 = textView
 
+        //Getting payment object and updating view
+
+        var payments: List<PaymentObject> = ArrayList()
+        val model: ViewModelTest by viewModels()
         model.getUser()
         model.live_response?.observe(this, Observer<Payment> { new ->
-            textViewV2?.append(model.live_response?.value?.data?.get(0)?.transaction_kind)
-        })
+            payments = model.live_response.value?.data!!
+            textViewV2?.append(model.live_response?.value?.status.toString())
 
-//        val recyclerView: RecyclerView = findViewById(R.id.rvAnimals)
-//        recyclerView.layoutManager = LinearLayoutManager(this@MainActivity)
-//        adapter = MyRecyclerViewAdapter(this@MainActivity, paymentss)
-//        recyclerView.adapter = adapter
+            //ReciclerView setup
+            val recyclerView: RecyclerView = findViewById(R.id.rvAnimals)
+            recyclerView.layoutManager = LinearLayoutManager(this@MainActivity)
+            adapter = MyRecyclerViewAdapter(this@MainActivity, payments)
+            recyclerView.adapter = adapter
+        })
     }
 
     fun onItemClick(view: View?, position: Int) {
