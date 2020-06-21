@@ -1,4 +1,4 @@
-package com.example.wisproapi
+package com.example.wisproapi.viewmodels
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.example.wisproapi.R
 import com.example.wisproapi.retrofit_models.PaymentObject
 
 
@@ -23,7 +24,7 @@ class MyRecyclerViewAdapter internal constructor(
         parent: ViewGroup,
         viewType: Int
     ): ViewHolder {
-        val view: View = mInflater.inflate(R.layout.reciclerview_row , parent, false)
+        val view: View = mInflater.inflate(R.layout.reciclerview_row, parent, false)
         return ViewHolder(view)
     }
 

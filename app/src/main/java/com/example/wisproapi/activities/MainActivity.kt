@@ -1,4 +1,4 @@
-package com.example.wisproapi
+package com.example.wisproapi.activities
 
 import androidx.recyclerview.widget.RecyclerView
 import android.os.Bundle
@@ -8,19 +8,15 @@ import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
-import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.wisproapi.retrofit_models.JsonPayments
+import com.example.wisproapi.viewmodels.MyRecyclerViewAdapter
+import com.example.wisproapi.R
+import com.example.wisproapi.repositories.WisproRepository
 import com.example.wisproapi.retrofit_models.Payment
 import com.example.wisproapi.retrofit_models.PaymentObject
-import com.example.wisproapi.retrofit_models.ServiceBuilder
-import com.example.wisproapi.viewmodels.ViewModelTest
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
-import kotlin.coroutines.*
+import com.example.wisproapi.viewmodels.PaymentsViewModel
 
 class MainActivity : AppCompatActivity() {
     var adapter: MyRecyclerViewAdapter? = null
@@ -41,20 +37,42 @@ class MainActivity : AppCompatActivity() {
         val textViewV2 = textView
 
         //Getting payment object and updating view
+        var repository: WisproRepository? = WisproRepository()
 
-        var payments: List<PaymentObject> = ArrayList()
-        val model: ViewModelTest by viewModels()
-        model.getUser()
-        model.live_response?.observe(this, Observer<Payment> { new ->
-            payments = model.live_response.value?.data!!
-            textViewV2?.append(model.live_response?.value?.status.toString())
+//        var payments: List<PaymentObject> = ArrayList()
+        val view_model: PaymentsViewModel by viewModels()
+
+        view_model.user?.observe(this, Observer<Payment> { new ->
+
+            textViewV2?.append(view_model.user?.value?.status.toString())
 
             //ReciclerView setup
             val recyclerView: RecyclerView = findViewById(R.id.rvAnimals)
             recyclerView.layoutManager = LinearLayoutManager(this@MainActivity)
-            adapter = MyRecyclerViewAdapter(this@MainActivity, payments)
+            adapter = MyRecyclerViewAdapter(
+                this@MainActivity,
+                view_model.user.value!!.data!!
+            )
             recyclerView.adapter = adapter
         })
+//        var payments: List<PaymentObject> = ArrayList()
+//        val view_model: PaymentsViewModel by viewModels()
+//
+//        view_model.getUser()
+//        view_model.live_response?.observe(this, Observer<Payment> { new ->
+//
+//            payments = view_model.live_response.value?.data!!
+//            textViewV2?.append(view_model.live_response?.value?.status.toString())
+//
+//            //ReciclerView setup
+//            val recyclerView: RecyclerView = findViewById(R.id.rvAnimals)
+//            recyclerView.layoutManager = LinearLayoutManager(this@MainActivity)
+//            adapter = MyRecyclerViewAdapter(
+//                this@MainActivity,
+//                payments
+//            )
+//            recyclerView.adapter = adapter
+//        })
     }
 
     fun onItemClick(view: View?, position: Int) {
