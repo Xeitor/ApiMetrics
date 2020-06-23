@@ -9,13 +9,9 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.wisproapi.viewmodels.MyRecyclerViewAdapter
 import com.example.wisproapi.R
-import com.example.wisproapi.repositories.WisproRepository
 import com.example.wisproapi.retrofit_models.Payment
-import com.example.wisproapi.retrofit_models.PaymentObject
 import com.example.wisproapi.viewmodels.PaymentsViewModel
 
 class MainActivity : AppCompatActivity() {
@@ -32,26 +28,21 @@ class MainActivity : AppCompatActivity() {
         toolbar.title = "Wispro Api"
         setSupportActionBar(toolbar)
 
-        //Testing textview
+        //textview
         textView = findViewById(R.id.statuscode)
         val textViewV2 = textView
 
         //Getting payment object and updating view
-        var repository: WisproRepository? = WisproRepository()
-
-//        var payments: List<PaymentObject> = ArrayList()
         val view_model: PaymentsViewModel by viewModels()
+        view_model.payment_object?.observe(this, Observer<Payment> { new ->
 
-        view_model.user?.observe(this, Observer<Payment> { new ->
-
-            textViewV2?.append(view_model.user?.value?.status.toString())
-
+            textViewV2?.append(view_model.payment_object?.value?.status.toString())
             //ReciclerView setup
-            val recyclerView: RecyclerView = findViewById(R.id.rvAnimals)
+            val recyclerView: RecyclerView = findViewById(R.id.reciclerview_widget)
             recyclerView.layoutManager = LinearLayoutManager(this@MainActivity)
             adapter = MyRecyclerViewAdapter(
                 this@MainActivity,
-                view_model.user.value!!.data!!
+                view_model.payment_object.value!!.data!!
             )
             recyclerView.adapter = adapter
         })
