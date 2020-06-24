@@ -1,5 +1,6 @@
 package com.example.wisproapi.retrofit_models
 
+import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -16,7 +17,16 @@ object ServiceBuilder {
         .client(client)
         .build()
 
+    val requestInterface = Retrofit.Builder()
+        .baseUrl("https://www.cloud.wispro.co")
+        .addConverterFactory(GsonConverterFactory.create())
+        .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+
     fun<T> buildService(service: Class<T>): T {
         return retrofit.create(service)
+    }
+
+    fun<T> buildServiceRx(service: Class<T>): T {
+        return requestInterface.build().create(service)
     }
 }

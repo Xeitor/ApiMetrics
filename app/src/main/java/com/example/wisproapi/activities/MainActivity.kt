@@ -2,6 +2,7 @@ package com.example.wisproapi.activities
 
 import androidx.recyclerview.widget.RecyclerView
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.TextView
 import android.widget.Toast
@@ -13,6 +14,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.wisproapi.R
 import com.example.wisproapi.retrofit_models.Payment
 import com.example.wisproapi.viewmodels.PaymentsViewModel
+import io.reactivex.disposables.Disposable
 
 class MainActivity : AppCompatActivity() {
     var adapter: MyRecyclerViewAdapter? = null
@@ -46,6 +48,24 @@ class MainActivity : AppCompatActivity() {
             )
             recyclerView.adapter = adapter
         })
+
+        val observer = Observer<Payment?> {
+            fun onNext(t: Int) {
+                // Perform the value of `t`
+            }
+            fun onComplete() {
+                // Perform something on complete
+            }
+            fun onSubscribe(d: Disposable) {
+                // Disposable provided
+            }
+            fun onError(e: Throwable) {
+                // Handling error
+            }
+        }
+
+//        view_model.payments_rx?
+        
 //        var payments: List<PaymentObject> = ArrayList()
 //        val view_model: PaymentsViewModel by viewModels()
 //
@@ -64,6 +84,13 @@ class MainActivity : AppCompatActivity() {
 //            )
 //            recyclerView.adapter = adapter
 //        })
+    }
+
+    fun handleResponse() {
+        Log.d("testing", "pass")
+    }
+    fun handleError() {
+        Log.d("testing", "error")
     }
 
     fun onItemClick(view: View?, position: Int) {
