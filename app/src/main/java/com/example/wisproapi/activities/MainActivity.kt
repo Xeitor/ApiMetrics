@@ -1,6 +1,5 @@
 package com.example.wisproapi.activities
 
-import androidx.recyclerview.widget.RecyclerView
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -9,12 +8,14 @@ import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
-import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.wisproapi.R
 import com.example.wisproapi.retrofit_models.Payment
 import com.example.wisproapi.viewmodels.PaymentsViewModel
+import io.reactivex.Observer
 import io.reactivex.disposables.Disposable
+import rx.Subscriber
 
 class MainActivity : AppCompatActivity() {
     var adapter: MyRecyclerViewAdapter? = null
@@ -36,33 +37,33 @@ class MainActivity : AppCompatActivity() {
 
         //Getting payment object and updating view
         val view_model: PaymentsViewModel by viewModels()
-        view_model.payment_object?.observe(this, Observer<Payment> { new ->
+        val subscribe = view_model.payments_rx?.subscribe({
+            textViewV2?.append(it?.status.toString())
 
-            textViewV2?.append(view_model.payment_object?.value?.status.toString())
-            //ReciclerView setup
+            //ReciclerView Setup
             val recyclerView: RecyclerView = findViewById(R.id.reciclerview_widget)
             recyclerView.layoutManager = LinearLayoutManager(this@MainActivity)
             adapter = MyRecyclerViewAdapter(
                 this@MainActivity,
-                view_model.payment_object.value!!.data!!
+                it?.data!!
             )
             recyclerView.adapter = adapter
+        }, {
+            textViewV2?.append("fail")
         })
 
-        val observer = Observer<Payment?> {
-            fun onNext(t: Int) {
-                // Perform the value of `t`
-            }
-            fun onComplete() {
-                // Perform something on complete
-            }
-            fun onSubscribe(d: Disposable) {
-                // Disposable provided
-            }
-            fun onError(e: Throwable) {
-                // Handling error
-            }
-        }
+//        view_model.payment_object?.observe(this, Observer<Payment> { new ->
+//
+//            textViewV2?.append(view_model.payment_object?.value?.status.toString())
+//            //ReciclerView setup
+//            val recyclerView: RecyclerView = findViewById(R.id.reciclerview_widget)
+//            recyclerView.layoutManager = LinearLayoutManager(this@MainActivity)
+//            adapter = MyRecyclerViewAdapter(
+//                this@MainActivity,
+//                view_model.payment_object.value!!.data!!
+//            )
+//            recyclerView.adapter = adapter
+//        })
 
 //        view_model.payments_rx?
         
@@ -76,23 +77,15 @@ class MainActivity : AppCompatActivity() {
 //            textViewV2?.append(view_model.live_response?.value?.status.toString())
 //
 //            //ReciclerView setup
-//            val recyclerView: RecyclerView = findViewById(R.id.rvAnimals)
-//            recyclerView.layoutManager = LinearLayoutManager(this@MainActivity)
-//            adapter = MyRecyclerViewAdapter(
-//                this@MainActivity,
-//                payments
-//            )
-//            recyclerView.adapter = adapter
+////            val recyclerView: RecyclerView = findViewById(R.id.rvAnimals)
+////            recyclerView.layoutManager = LinearLayoutManager(this@MainActivity)
+////            adapter = MyRecyclerViewAdapter(
+////                this@MainActivity,
+////                payments
+////            )
+////            recyclerView.adapter = adapter
 //        })
     }
-
-    fun handleResponse() {
-        Log.d("testing", "pass")
-    }
-    fun handleError() {
-        Log.d("testing", "error")
-    }
-
     fun onItemClick(view: View?, position: Int) {
         Toast.makeText(
             this,

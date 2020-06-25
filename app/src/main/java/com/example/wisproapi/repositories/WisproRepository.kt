@@ -14,9 +14,10 @@ import retrofit2.Response
 class WisproRepository() {
 
     val request = ServiceBuilder.buildService(JsonPayments::class.java)
+    val requestrx = ServiceBuilder.buildServiceRx(JsonPayments::class.java)
     val listCallV2: Call<Payment> = request.getPostsV2(2,100, "64dc19d7-1227-4741-9fe3-de3f476aa203")
     val listCallV1: Call<Payment> = request.getPostsV2(1,100, "64dc19d7-1227-4741-9fe3-de3f476aa203")
-    val listCallRx: Observable<Payment> = request.getPostsRx(1,100, "64dc19d7-1227-4741-9fe3-de3f476aa203")
+    val listCallRx: Observable<Payment> = requestrx.getPostsRx(1,100, "64dc19d7-1227-4741-9fe3-de3f476aa203")
 
     val calls: MutableList<Call<Payment>> = ArrayList()
 
