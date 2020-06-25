@@ -9,15 +9,15 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 object ServiceBuilder {
-    private val client = OkHttpClient.Builder().build()
 
+    private val client = OkHttpClient.Builder().build()
     private val retrofit = Retrofit.Builder()
         .baseUrl("https://www.cloud.wispro.co")
         .addConverterFactory(GsonConverterFactory.create())
         .client(client)
         .build()
 
-    val requestInterface = Retrofit.Builder()
+    val retrofitRx = Retrofit.Builder()
         .baseUrl("https://www.cloud.wispro.co")
         .addConverterFactory(GsonConverterFactory.create())
         .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
@@ -27,6 +27,6 @@ object ServiceBuilder {
     }
 
     fun<T> buildServiceRx(service: Class<T>): T {
-        return requestInterface.build().create(service)
+        return retrofitRx.build().create(service)
     }
 }

@@ -1,0 +1,85 @@
+// Interface driven callback
+////Step 1: Create an interface for the callback method
+//interface ClickEventHandler {
+//    public void handleClick();
+//}
+//
+////Step 2: Create a callback handler
+////implementing the above interface
+//class ClickHandler implements ClickEventHandler {
+//    public void handleClick() {
+//        System.out.println("Clicked");
+//    }
+//}
+//
+////Step 3: Create event generator class
+//class Button {
+//    public void onClick(ClickEventHandler clickHandler) {
+//        clickHandler.handleClick();
+//    }
+//}
+//
+//public class Tester {
+//    public static void main(String[] args) {
+//        Button button = new Button();
+//        ClickHandler clickHandler = new ClickHandler();
+//        //pass the clickHandler to do the default operation
+//        button.onClick(clickHandler);
+//
+//        Button button1 = new Button();
+//        //pass the interface to implement own operation
+//        button1.onClick(new ClickEventHandler() {
+//            @Override
+//            public void handleClick() {
+//                System.out.println("Button Clicked");
+//            }
+//        });
+//    }
+//}
+
+// Retrofit creation
+//        val retrofit = Retrofit.Builder().baseUrl("https://www.cloud.wispro.co")
+//            .addConverterFactory(GsonConverterFactory.create())
+//            .build()
+//
+//        val jsonInvoices:JsonPayments = retrofit.create(
+//            JsonPayments::class.java
+//        )
+//        val listCall: Call<Payment> = jsonInvoices.getPostsV2(2, 100)
+
+//        listCallV2.enqueue(object : Callback<Payment> {
+//            override fun onResponse(call: Call<Payment>?, response: Response<Payment>
+//            ) {
+//                if (!response.isSuccessful) {
+//                    textView?.setText("Code " + response.code())
+//                    return
+//                }
+//                val payments = response.body()
+//
+//                var content = "${payments.status}"
+//
+//                textView?.append(content)
+//
+//                // set up the RecyclerView
+//                val recyclerView: RecyclerView = findViewById(R.id.rvAnimals)
+//                recyclerView.layoutManager = LinearLayoutManager(this@MainActivity)
+//                adapter = MyRecyclerViewAdapter(this@MainActivity, payments.data)
+//                recyclerView.adapter = adapter
+//            }
+//
+//            override fun onFailure(call: Call<Payment>, t: Throwable?) {
+//                textView?.setText("Error")
+//            }
+//        })
+//        view_model.payment_object?.observe(this, Observer<Payment> { new ->
+//
+//            textViewV2?.append(view_model.payment_object?.value?.status.toString())
+//            //ReciclerView setup
+//            val recyclerView: RecyclerView = findViewById(R.id.reciclerview_widget)
+//            recyclerView.layoutManager = LinearLayoutManager(this@MainActivity)
+//            adapter = MyRecyclerViewAdapter(
+//                this@MainActivity,
+//                view_model.payment_object.value!!.data!!
+//            )
+//            recyclerView.adapter = adapter
+//        })

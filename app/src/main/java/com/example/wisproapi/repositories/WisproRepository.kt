@@ -29,42 +29,10 @@ class WisproRepository() {
         live_monthly_payments.value = monthly_payments
     }
 
-//    fun getMonthlyPayments(): MutableLiveData<ArrayList<Payment>> {
-//        calls.add(listCallV1)
-//        calls.add(listCallV2)
-//
-//
-//
-//        listCallV2.clone().enqueue(object : Callback<Payment> {
-//            override fun onResponse(call: Call<Payment>, response: Response<Payment>) {
-//                addIssuePost(response.body())
-//            }
-//            // Error case is left out for brevity.
-//            override fun onFailure(call: Call<Payment>, t: Throwable) {
-//                TODO()
-//            }
-//        })
-//        return live_monthly_payments
-//    }
-
-    fun getTopContributors(): Observable<Payment?>? {
+    fun getPaymentsRx(): Observable<Payment?>? {
         return listCallRx.subscribeOn(Schedulers.newThread())
             .observeOn(AndroidSchedulers.mainThread())
     }
-
-//    fun getPaymentsRx(): MutableLiveData<Payment> {
-//        var data = MutableLiveData<Payment>()
-//        listCallRx.myCompositeDisposable?.add(requestInterface.getData()
-//
-////Send the Observable’s notifications to the main UI thread//
-//
-//            .observeOn(AndroidSchedulers.mainThread())
-//
-////Subscribe to the Observer away from the main UI thread//
-//
-//            .subscribeOn(Schedulers.io())
-//            .subscribe(this::handleResponse))
-//    }
 
     fun getPayments(): MutableLiveData<Payment> {
         var data = MutableLiveData<Payment>()
@@ -72,12 +40,11 @@ class WisproRepository() {
             override fun onResponse(call: Call<Payment>, response: Response<Payment>) {
                 data.value = response.body()
             }
-            // Error case is left out for brevity.
+
             override fun onFailure(call: Call<Payment>, t: Throwable) {
                 TODO()
             }
         })
         return data
     }
-
 }
