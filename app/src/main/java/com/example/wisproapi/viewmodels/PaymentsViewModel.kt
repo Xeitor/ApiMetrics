@@ -14,7 +14,9 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 class PaymentsViewModel:ViewModel() {
+
     var wisproRepository = WisproRepository()
-    var payment_object: MutableLiveData<Payment> = wisproRepository!!.getPayments()
+    var payment_object: MutableLiveData<Payment> = wisproRepository.getPayments()
     var payments_rx: Observable<Payment?>? = wisproRepository.getPaymentsRx()
+    var montly_payments: Observable<Payment> = wisproRepository.getmontlhyPayments()
 }
