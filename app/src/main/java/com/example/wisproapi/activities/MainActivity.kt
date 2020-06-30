@@ -12,6 +12,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.wisproapi.R
 import com.example.wisproapi.retrofit_models.Payment
+import com.example.wisproapi.retrofit_models.PaymentHandler
+import com.example.wisproapi.retrofit_models.PaymentObject
 import com.example.wisproapi.viewmodels.PaymentsViewModel
 import io.reactivex.disposables.Disposable
 import io.reactivex.internal.util.HalfSerializer.onNext
@@ -39,18 +41,26 @@ class MainActivity : AppCompatActivity() {
 
         //Getting payment object and updating view
         val view_model: PaymentsViewModel by viewModels()
+        val payments_list: MutableList<MutableList<PaymentObject>> = ArrayList()
+        val payment_handler: PaymentHandler = PaymentHandler()
         val subscribe = view_model.montly_payments.subscribe({
-            textViewV2?.append(it?.status.toString())
 
+            textViewV2?.append(it?.status.toString())
+            payment_handler.addPayments(it.data!!)
+
+        }, {
+            textViewV2?.append("fail")
+        },{
+            textViewV2?.setText("Total:")
             val recyclerView: RecyclerView = findViewById(R.id.reciclerview_widget)
             recyclerView.layoutManager = LinearLayoutManager(this@MainActivity)
             adapter = MyRecyclerViewAdapter(
                 this@MainActivity,
-                it?.data!!
+                payment_handler.payments
             )
             recyclerView.adapter = adapter
-        }, {
-            textViewV2?.append("fail")
+
+            textViewV2?.append(" " + payment_handler.total.toString())
         })
 //        val view_model: PaymentsViewModel by viewModels()
 //        val subscribe = view_model.payments_rx?.subscribe({

@@ -19,4 +19,5 @@ class PaymentsViewModel:ViewModel() {
     var payment_object: MutableLiveData<Payment> = wisproRepository.getPayments()
     var payments_rx: Observable<Payment?>? = wisproRepository.getPaymentsRx()
     var montly_payments: Observable<Payment> = wisproRepository.getmontlhyPayments()
+    var real_montly_payments: Observable<Payment?>? = wisproRepository.getMontlyPaymentsRx()
 }

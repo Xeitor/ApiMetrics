@@ -20,6 +20,7 @@ class WisproRepository {
     val listCallV1: Call<Payment> = request.getPostsV2(1,100, "64dc19d7-1227-4741-9fe3-de3f476aa203")
     val listCallRx: Observable<Payment> = requestrx.getPostsRx(1,100, "64dc19d7-1227-4741-9fe3-de3f476aa203")
     val listCallRx2: Observable<Payment> = requestrx.getPostsRx(2,100, "64dc19d7-1227-4741-9fe3-de3f476aa203")
+    val montlycallRx: Observable<Payment> = requestrx.getmontlyPaymentsRx("2020-06-01T00:00:00.000-03:00",1,100, "9d168f07-2c58-493d-9d98-55baf59d6f6b")
 
     val calls: MutableList<Observable<Payment>> = ArrayList()
 
@@ -34,6 +35,12 @@ class WisproRepository {
     fun getPaymentsRx(): Observable<Payment?>? {
         return listCallRx.subscribeOn(Schedulers.newThread())
             .observeOn(AndroidSchedulers.mainThread())
+    }
+
+    fun getMontlyPaymentsRx(): Observable<Payment?>? {
+        return montlycallRx.subscribeOn(Schedulers.newThread())
+            .observeOn(AndroidSchedulers.mainThread())
+
     }
 
     fun getPayments(): MutableLiveData<Payment> {
