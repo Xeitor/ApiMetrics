@@ -4,7 +4,6 @@ class PaymentHandler() {
     var payments: MutableList<PaymentObject> = ArrayList()
     var total: Float = 0F
         get() = makeTotal()
-    var test: Float = 0.1F
 
     fun makeTotal(): Float {
         var aux: Float = 0F

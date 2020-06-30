@@ -14,38 +14,27 @@ import retrofit2.Response
 
 class WisproRepository {
 
-    val request = ServiceBuilder.buildService(JsonPayments::class.java)
-    val requestrx = ServiceBuilder.buildServiceRx(JsonPayments::class.java)
-    val listCallV2: Call<Payment> = request.getPostsV2(2,100, "64dc19d7-1227-4741-9fe3-de3f476aa203")
-    val listCallV1: Call<Payment> = request.getPostsV2(1,100, "64dc19d7-1227-4741-9fe3-de3f476aa203")
-    val listCallRx: Observable<Payment> = requestrx.getPostsRx(1,100, "64dc19d7-1227-4741-9fe3-de3f476aa203")
-    val listCallRx2: Observable<Payment> = requestrx.getPostsRx(2,100, "64dc19d7-1227-4741-9fe3-de3f476aa203")
-    val montlycallRx: Observable<Payment> = requestrx.getmontlyPaymentsRx("2020-06-01T00:00:00.000-03:00",1,100, "9d168f07-2c58-493d-9d98-55baf59d6f6b")
-
-    val calls: MutableList<Observable<Payment>> = ArrayList()
-
-    private val monthly_payments = ArrayList<Payment>()
-    private val live_monthly_payments = MutableLiveData<ArrayList<Payment>>()
-
-    fun addIssuePost(payment: Payment) {
-        monthly_payments.add(payment)
-        live_monthly_payments.value = monthly_payments
-    }
-
-    fun getPaymentsRx(): Observable<Payment?>? {
-        return listCallRx.subscribeOn(Schedulers.newThread())
+    // Makes one call returns observer
+    fun getPaymentsRx(call: Observable<Payment>): Observable<Payment?>? {
+        return call.subscribeOn(Schedulers.newThread())
             .observeOn(AndroidSchedulers.mainThread())
     }
 
-    fun getMontlyPaymentsRx(): Observable<Payment?>? {
-        return montlycallRx.subscribeOn(Schedulers.newThread())
+    fun getMontlyPaymentsRx(call: Observable<Payment>): Observable<Payment?>? {
+        return call.subscribeOn(Schedulers.newThread())
             .observeOn(AndroidSchedulers.mainThread())
-
     }
 
-    fun getPayments(): MutableLiveData<Payment> {
+    // Merge multiple calls into one observer
+    fun getMultiplePayments(call_list: MutableList<Observable<Payment>>): Observable<Payment> {
+        return Observable.merge(call_list).subscribeOn(Schedulers.newThread()).observeOn(AndroidSchedulers.mainThread())
+    }
+
+
+    //Livedata method
+    fun getPayments(call: Call<Payment>): MutableLiveData<Payment> {
         var data = MutableLiveData<Payment>()
-        listCallV2.clone().enqueue(object : Callback<Payment> {
+        call.clone().enqueue(object : Callback<Payment> {
             override fun onResponse(call: Call<Payment>, response: Response<Payment>) {
                 data.value = response.body()
             }
@@ -55,21 +44,5 @@ class WisproRepository {
             }
         })
         return data
-    }
-    fun getmontlhyPayments(): Observable<Payment> {
-        calls.add(listCallRx)
-        calls.add(listCallRx2)
-
-        val payments: List<Payment> = ArrayList()
-
-        return Observable.merge(calls).subscribeOn(Schedulers.newThread()).observeOn(AndroidSchedulers.mainThread())
-        // Will be triggered if all requests will end successfully (4xx and 5xx also are successful requests too)
-    }
-
-    fun convertV2(a: Payment, b:Payment): List<Payment> {
-        var lista: MutableList<Payment> = ArrayList()
-        lista.add(a)
-        lista.add(b)
-        return lista
     }
 }
