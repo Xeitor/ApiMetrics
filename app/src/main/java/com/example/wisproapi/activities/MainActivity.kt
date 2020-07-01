@@ -24,7 +24,6 @@ class MainActivity : AppCompatActivity() {
     var adapter: MyRecyclerViewAdapter? = null
     private var textView: TextView? = null
 
-    @SuppressLint("CheckResult")
     override fun onCreate(savedInstanceState: Bundle?) {
 
         super.onCreate(savedInstanceState)
@@ -43,7 +42,7 @@ class MainActivity : AppCompatActivity() {
         val view_model: PaymentsViewModel by viewModels()
         val payments_list: MutableList<MutableList<PaymentObject>> = ArrayList()
         val payment_handler: PaymentHandler = PaymentHandler()
-        val subscribe = view_model.real_montly_payments?.subscribe({
+        val subscribe = view_model.test?.subscribe({
 
             textViewV2?.append(it?.status.toString())
             payment_handler.addPayments(it?.data!!)
