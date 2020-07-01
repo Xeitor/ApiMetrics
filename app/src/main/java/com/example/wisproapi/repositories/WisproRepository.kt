@@ -37,7 +37,7 @@ class WisproRepository {
     }
 
     fun getMontlyPaymentsRx(call: Observable<Payment>): Observable<Payment?>? {
-        return listCallRx2.subscribeOn(Schedulers.newThread())
+        return call.subscribeOn(Schedulers.newThread())
             .observeOn(AndroidSchedulers.mainThread())
     }
 
