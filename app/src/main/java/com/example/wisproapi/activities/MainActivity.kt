@@ -43,7 +43,6 @@ class MainActivity : AppCompatActivity() {
         val payments_list: MutableList<MutableList<PaymentObject>> = ArrayList()
         val payment_handler: PaymentHandler = PaymentHandler()
         val subscribe = view_model.payments_list?.subscribe({
-
             textViewV2?.append(it?.status.toString())
             payment_handler.addPayments(it?.data!!)
 
@@ -61,22 +60,6 @@ class MainActivity : AppCompatActivity() {
 
             textViewV2?.append(" " + payment_handler.total.toString())
         })
-//        val view_model: PaymentsViewModel by viewModels()
-//        val subscribe = view_model.payments_rx?.subscribe({
-//            textViewV2?.append(it?.status.toString())
-//
-//            //ReciclerView Setup
-//            val recyclerView: RecyclerView = findViewById(R.id.reciclerview_widget)
-//            recyclerView.layoutManager = LinearLayoutManager(this@MainActivity)
-//            adapter = MyRecyclerViewAdapter(
-//                this@MainActivity,
-//                it?.data!!
-//            )
-//            recyclerView.adapter = adapter
-//        }, {
-//            textViewV2?.append("fail")
-//        })
-//        view_model.montly_payments.subscribe({textViewV2?.append("onNext")}, {textViewV2?.append("fail")}, {textViewV2?.append("pass")})
     }
 
     fun onItemClick(view: View?, position: Int) {
