@@ -40,7 +40,16 @@ class MainActivity : AppCompatActivity() {
 
         //Getting payment object and updating view
         val view_model: PaymentsViewModel by viewModels()
-        val payment_handler: PaymentHandler = PaymentHandler()
+        view_model.get_live_payment().observe(this, androidx.lifecycle.Observer<PaymentHandler> { new->
+
+            //SetupReciclerView
+            val recyclerView: RecyclerView = findViewById(R.id.reciclerview_widget)
+            recyclerView.layoutManager = LinearLayoutManager(this@MainActivity)
+            adapter = MyRecyclerViewAdapter(this@MainActivity, view_model.livePayment.value!!.payments)
+            recyclerView.adapter = adapter
+
+            textViewV2?.append("Total: " + view_model.livePayment.value!!.total.toString())
+        })
     }
 
     fun onItemClick(view: View?, position: Int) {
