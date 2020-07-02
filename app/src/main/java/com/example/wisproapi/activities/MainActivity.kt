@@ -40,26 +40,7 @@ class MainActivity : AppCompatActivity() {
 
         //Getting payment object and updating view
         val view_model: PaymentsViewModel by viewModels()
-        val payments_list: MutableList<MutableList<PaymentObject>> = ArrayList()
         val payment_handler: PaymentHandler = PaymentHandler()
-        val subscribe = view_model.payments_list?.subscribe({
-            textViewV2?.append(it?.status.toString())
-            payment_handler.addPayments(it?.data!!)
-
-        }, {
-            textViewV2?.append("fail")
-        },{
-            textViewV2?.setText("Total:")
-            val recyclerView: RecyclerView = findViewById(R.id.reciclerview_widget)
-            recyclerView.layoutManager = LinearLayoutManager(this@MainActivity)
-            adapter = MyRecyclerViewAdapter(
-                this@MainActivity,
-                payment_handler.payments
-            )
-            recyclerView.adapter = adapter
-
-            textViewV2?.append(" " + payment_handler.total.toString())
-        })
     }
 
     fun onItemClick(view: View?, position: Int) {

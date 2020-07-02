@@ -1,5 +1,6 @@
 package com.example.wisproapi.viewmodels
 
+import android.annotation.SuppressLint
 import android.view.View
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -8,6 +9,7 @@ import androidx.lifecycle.ViewModel
 import com.example.wisproapi.repositories.WisproRepository
 import com.example.wisproapi.retrofit_models.JsonPayments
 import com.example.wisproapi.retrofit_models.Payment
+import com.example.wisproapi.retrofit_models.PaymentHandler
 import com.example.wisproapi.retrofit_models.ServiceBuilder
 import io.reactivex.Observable
 import retrofit2.Call
@@ -18,6 +20,24 @@ class PaymentsViewModel:ViewModel() {
 
     //Making call with WisproRepository
     var payment: Observable<Payment?>? = wisproRepository.getPaymentsRx()
-    var payments_list: Observable<Payment> = wisproRepository.getMultiplePayments()
+    var multiple_payments = wisproRepository.getMultiplePayments()
 
+    @SuppressLint("CheckResult")
+    fun get_live_payment(): MutableLiveData<PaymentHandler> {
+        val livePayment: MutableLiveData<PaymentHandler> by lazy {
+            MutableLiveData<PaymentHandler>()
+        }
+        val payment_handler: PaymentHandler = PaymentHandler()
+
+        multiple_payments.subscribe({
+            //Onnext
+            payment_handler.addPayments(it?.data!!)
+        }, {
+            //Onerror
+        },{
+            //Oncompleted
+            livePayment.value = payment_handler
+        })
+        return livePayment
+    }
 }
