@@ -42,7 +42,7 @@ class MainActivity : AppCompatActivity() {
         val view_model: PaymentsViewModel by viewModels()
         val payments_list: MutableList<MutableList<PaymentObject>> = ArrayList()
         val payment_handler: PaymentHandler = PaymentHandler()
-        val subscribe = view_model.test?.subscribe({
+        val subscribe = view_model.payment?.subscribe({
 
             textViewV2?.append(it?.status.toString())
             payment_handler.addPayments(it?.data!!)
