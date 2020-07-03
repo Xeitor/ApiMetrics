@@ -23,7 +23,8 @@
         android:layout_below="@+id/my_toolbar"
         android:layout_marginTop="-30dp"
         android:textSize="20sp"
-        android:padding="10dp"/>
+        android:padding="10dp"
+        android:textStyle="bold|italic"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/reciclerview_widget"
