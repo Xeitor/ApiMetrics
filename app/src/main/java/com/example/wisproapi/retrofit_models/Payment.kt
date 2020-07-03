@@ -10,4 +10,5 @@ class PaymentObject {
     @SerializedName("amount")  val amount: String? = null
     @SerializedName("client_name")  val client_name: String? = null
     @SerializedName("transaction_kind")  val transaction_kind: String? = null
+    @SerializedName("payment_date")  val payment_date: String? = null
 }

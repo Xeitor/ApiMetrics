@@ -37,6 +37,7 @@ class MyRecyclerViewAdapter internal constructor(
         holder.client_name.text = payment.client_name
         holder.ammount.text = payment.amount
         holder.transaction_kind.text = payment.transaction_kind
+        holder.payment_date.text = payment.payment_date?.substring(0,10)
     }
 
     // total number of rows
@@ -50,6 +51,7 @@ class MyRecyclerViewAdapter internal constructor(
         var client_name: TextView = itemView.findViewById(R.id.client_name)
         var ammount: TextView = itemView.findViewById(R.id.ammount)
         var transaction_kind: TextView = itemView.findViewById(R.id.transaction_kind)
+        var payment_date: TextView = itemView.findViewById(R.id.payment_date)
         override fun onClick(view: View?) {
             if (mClickListener != null) mClickListener!!.onItemClick(view, adapterPosition)
         }
