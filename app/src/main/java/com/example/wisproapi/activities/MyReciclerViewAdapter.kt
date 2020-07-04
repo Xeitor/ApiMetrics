@@ -18,7 +18,7 @@ class MyRecyclerViewAdapter internal constructor(
     private val mData: List<PaymentObject> = data
     private val mInflater: LayoutInflater = LayoutInflater.from(context)
     private var mClickListener: ItemClickListener? = null
-
+    private var mExpandedPosition: Int = -1
     // inflates the row layout from xml when needed
     override fun onCreateViewHolder(
         parent: ViewGroup,
@@ -35,9 +35,18 @@ class MyRecyclerViewAdapter internal constructor(
     ) {
         val payment = mData.get(position)
         holder.client_name.text = payment.client_name
-        holder.ammount.text = payment.amount
+        holder.ammount.text = "$" + payment.amount
         holder.transaction_kind.text = payment.transaction_kind
         holder.payment_date.text = payment.payment_date?.substring(0,10)
+        holder.details.text = payment.payment_date?.substring(0,10)
+
+        val isExpanded = position === mExpandedPosition
+        holder.details.setVisibility(if (isExpanded) View.VISIBLE else View.GONE)
+        holder.itemView.isActivated = isExpanded
+        holder.itemView.setOnClickListener {
+            mExpandedPosition = if (isExpanded) -1 else position
+            notifyItemChanged(position)
+        }
     }
 
     // total number of rows
@@ -52,6 +61,7 @@ class MyRecyclerViewAdapter internal constructor(
         var ammount: TextView = itemView.findViewById(R.id.ammount)
         var transaction_kind: TextView = itemView.findViewById(R.id.transaction_kind)
         var payment_date: TextView = itemView.findViewById(R.id.payment_date)
+        var details: TextView = itemView.findViewById(R.id.details)
         override fun onClick(view: View?) {
             if (mClickListener != null) mClickListener!!.onItemClick(view, adapterPosition)
         }
