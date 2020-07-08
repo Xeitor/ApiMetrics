@@ -29,11 +29,11 @@ class MainActivity : AppCompatActivity() {
         toolbar.title = "Wispro Api"
         setSupportActionBar(toolbar)
 
-        //Textview
+//        Textview
         textView = findViewById(R.id.statuscode)
         val textViewV2 = textView
 
-        //Getting payment object and updating view
+//        Getting payment object and updating view
         val view_model: PaymentsViewModel by viewModels()
         view_model.get_live_payment().observe(this, androidx.lifecycle.Observer<PaymentHandler> { new->
 
