@@ -18,8 +18,8 @@
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
             android:background="@color/wispro"
-            app:itemIconTint="@color/white"
-            app:itemTextColor="@color/white"
+            app:itemIconTint="@color/black"
+            app:itemTextColor="@color/black"
             app:menu="@menu/bottom_navigation_menu"
             />
     </FrameLayout>

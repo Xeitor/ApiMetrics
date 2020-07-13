@@ -22,12 +22,12 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
 
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity__main_v2)
+        setContentView(R.layout.activity_main)
 
-        //Toolbar
-        val toolbar: Toolbar = findViewById<Toolbar>(R.id.my_toolbar)
-        toolbar.title = "Wispro Api"
-        setSupportActionBar(toolbar)
+//        //Toolbar
+//        val toolbar: Toolbar = findViewById<Toolbar>(R.id.my_toolbar)
+//        toolbar.title = "Wispro Api"
+//        setSupportActionBar(toolbar)
 
 //        Textview
         textView = findViewById(R.id.statuscode)
