@@ -26,7 +26,7 @@ class MainActivity : AppCompatActivity() {
 
         //Toolbar
         val toolbar: Toolbar = findViewById<Toolbar>(R.id.my_toolbar)
-        toolbar.title = ""
+        toolbar.title = "Wispr Api"
         setSupportActionBar(toolbar)
 
 //        Textview

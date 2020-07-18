@@ -1,144 +1,141 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activities.MainActivity"
-    android:orientation="vertical"
-    >
+    tools:context=".activities.MainActivity">
+
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/my_toolbar"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_width="match_parent"
-        android:minHeight="?android:attr/actionBarSize"
         android:background="@color/wispro"
-        android:gravity="top"
-        android:theme="@style/menu_text_style"
-        app:navigationIcon="@drawable/ic_menu_24px"
-        app:title="">
-        <androidx.appcompat.widget.LinearLayoutCompat
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+        android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
 
-            <TextView
-                android:id="@+id/tittle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/roboto"
-                android:textSize="20sp"
-                android:textStyle="bold"
-                android:textColor="@color/white"
-                android:text="Wispro Api"
-                android:paddingTop="46dp"/>
+    <TextView
+        android:id="@+id/statuscode"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/my_toolbar"
+        android:fontFamily="@font/roboto"
+        android:padding="10dp"
+        android:textSize="20sp"
+        android:textStyle="bold" />
 
-            <TextView
-                android:id="@+id/toolbar_text1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/roboto"
-                android:textSize="20sp"
-                android:textColor="@color/white"
-                android:text="Fixnet"
-                android:layout_below="@+id/tittle" />
-            <TextView
-                android:id="@+id/toolbar_text2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/roboto"
-                android:textSize="20sp"
-                android:textColor="@color/white"
-                android:text="Marzo, 20, 2020"/>
-
-        </androidx.appcompat.widget.LinearLayoutCompat>
-    </androidx.appcompat.widget.Toolbar>
-    <androidx.drawerlayout.widget.DrawerLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/drawer_layout"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/reciclerview_widget"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:fitsSystemWindows="true"
-        >
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
-            <include layout="@+id/my_toolbar" />
-        </LinearLayout>
-        <android.support.design.widget.NavigationView
-            android:id="@+id/navigation"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_gravity="start"
-            app:menu="@menu/nav_items" />
-    </androidx.drawerlayout.widget.DrawerLayout>
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/container"
-        >
-        <!-- Main content -->
-        <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-            xmlns:app="http://schemas.android.com/apk/res-auto"
-            xmlns:tools="http://schemas.android.com/tools"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            tools:context=".activities.MainActivity">
+        android:layout_below="@+id/statuscode"
+        android:layout_marginTop="5dp" />
 
-            <TextView
-                android:id="@+id/statuscode"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/roboto"
-                android:padding="10dp"
-                android:textSize="20sp"
-                android:textStyle="bold" />
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/reciclerview_widget"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_below="@+id/statuscode"
-                android:layout_marginTop="5dp" />
-
-        </RelativeLayout>
-    </FrameLayout>
-</LinearLayout>
-<!--<?xml version="1.0" encoding="utf-8"?>-->
-<!--<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
-<!--    xmlns:app="http://schemas.android.com/apk/res-auto"-->
-<!--    xmlns:tools="http://schemas.android.com/tools"-->
+</RelativeLayout>
+<!--    <?xml version="1.0" encoding="utf-8"?>-->
+<!--<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
+<!--xmlns:app="http://schemas.android.com/apk/res-auto"-->
+<!--xmlns:tools="http://schemas.android.com/tools"-->
+<!--android:layout_width="match_parent"-->
+<!--android:layout_height="match_parent"-->
+<!--tools:context=".activities.MainActivity"-->
+<!--android:orientation="vertical"-->
+<!--    >-->
+<!--<androidx.appcompat.widget.Toolbar-->
+<!--    android:id="@+id/my_toolbar"-->
+<!--    android:layout_height="wrap_content"-->
 <!--    android:layout_width="match_parent"-->
-<!--    android:layout_height="match_parent"-->
-<!--    tools:context=".activities.MainActivity">-->
-
-<!--    <androidx.appcompat.widget.Toolbar-->
-<!--        android:id="@+id/my_toolbar"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="?attr/actionBarSize"-->
-<!--        android:layout_marginBottom="50dp"-->
-<!--        android:background="?attr/colorPrimary"-->
-<!--        android:elevation="4dp"-->
-<!--        android:theme="@style/ThemeOverlay.AppCompat.ActionBar"-->
-<!--        app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />-->
-
-<!--    <TextView-->
-<!--        android:id="@+id/statuscode"-->
+<!--    android:minHeight="?android:attr/actionBarSize"-->
+<!--    android:background="@color/wispro"-->
+<!--    android:gravity="top"-->
+<!--    android:theme="@style/menu_text_style"-->
+<!--    app:navigationIcon="@drawable/ic_menu_24px"-->
+<!--    app:title="">-->
+<!--    <androidx.appcompat.widget.LinearLayoutCompat-->
 <!--        android:layout_width="wrap_content"-->
 <!--        android:layout_height="wrap_content"-->
-<!--        android:layout_below="@+id/my_toolbar"-->
-<!--        android:fontFamily="@font/roboto"-->
-<!--        android:padding="10dp"-->
-<!--        android:textSize="20sp"-->
-<!--        android:textStyle="bold" />-->
+<!--        android:orientation="vertical">-->
 
-<!--    <androidx.recyclerview.widget.RecyclerView-->
-<!--        android:id="@+id/reciclerview_widget"-->
+<!--        <TextView-->
+<!--            android:id="@+id/tittle"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:fontFamily="@font/roboto"-->
+<!--            android:textSize="20sp"-->
+<!--            android:textStyle="bold"-->
+<!--            android:textColor="@color/white"-->
+<!--            android:text="Wispro Api"-->
+<!--            android:paddingTop="46dp"/>-->
+
+<!--        <TextView-->
+<!--            android:id="@+id/toolbar_text1"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:fontFamily="@font/roboto"-->
+<!--            android:textSize="20sp"-->
+<!--            android:textColor="@color/black"-->
+<!--            android:text="Fixnet" />-->
+<!--        <TextView-->
+<!--            android:id="@+id/toolbar_text2"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:fontFamily="@font/roboto"-->
+<!--            android:textSize="20sp"-->
+<!--            android:textColor="@color/black"-->
+<!--            android:text="Marzo, 20, 2020"/>-->
+
+<!--    </androidx.appcompat.widget.LinearLayoutCompat>-->
+<!--</androidx.appcompat.widget.Toolbar>-->
+<!--<androidx.drawerlayout.widget.DrawerLayout-->
+<!--    xmlns:android="http://schemas.android.com/apk/res/android"-->
+<!--    xmlns:app="http://schemas.android.com/apk/res-auto"-->
+<!--    android:id="@+id/drawer_layout"-->
+<!--    android:layout_width="match_parent"-->
+<!--    android:layout_height="match_parent"-->
+<!--    android:fitsSystemWindows="true"-->
+<!--    >-->
+<!--    <LinearLayout-->
 <!--        android:layout_width="match_parent"-->
 <!--        android:layout_height="match_parent"-->
-<!--        android:layout_below="@+id/statuscode"-->
-<!--        android:layout_marginTop="5dp" />-->
+<!--        android:orientation="vertical">-->
+<!--        <include layout="@+id/my_toolbar" />-->
+<!--    </LinearLayout>-->
+<!--    <android.support.design.widget.NavigationView-->
+<!--        android:id="@+id/navigation"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="match_parent"-->
+<!--        android:layout_gravity="start"-->
+<!--        app:menu="@menu/nav_items" />-->
+<!--</androidx.drawerlayout.widget.DrawerLayout>-->
+<!--<FrameLayout-->
+<!--    android:layout_width="match_parent"-->
+<!--    android:layout_height="match_parent"-->
+<!--    android:id="@+id/container"-->
+<!--    >-->
+<!--    &lt;!&ndash; Main content &ndash;&gt;-->
+<!--    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
+<!--        xmlns:app="http://schemas.android.com/apk/res-auto"-->
+<!--        xmlns:tools="http://schemas.android.com/tools"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="match_parent"-->
+<!--        tools:context=".activities.MainActivity">-->
 
-<!--</RelativeLayout>-->
+<!--        <TextView-->
+<!--            android:id="@+id/statuscode"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:fontFamily="@font/roboto"-->
+<!--            android:padding="10dp"-->
+<!--            android:textSize="20sp"-->
+<!--            android:textStyle="bold" />-->
+
+<!--        <androidx.recyclerview.widget.RecyclerView-->
+<!--            android:id="@+id/reciclerview_widget"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="match_parent"-->
+<!--            android:layout_below="@+id/statuscode"-->
+<!--            android:layout_marginTop="5dp" />-->
+
+<!--    </RelativeLayout>-->
+<!--</FrameLayout>-->
+<!--</LinearLayout>-->
