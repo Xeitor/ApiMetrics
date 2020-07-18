@@ -7,24 +7,20 @@
 
     <fragment
         android:id="@+id/nav_home"
-        android:name="com.example.navdrawer.ui.home.HomeFragment"
-        android:label="@string/menu_home"
-        tools:layout="@layout/fragment_home">
-
-        <action
-            android:id="@+id/action_HomeFragment_to_HomeSecondFragment"
-            app:destination="@id/nav_home_second" />
+        android:name="com.example.wisproapi.activities.home.HomeFragment"
+        android:label="Home"
+        tools:layout="@layout/fragment_gallery">
     </fragment>
 
     <fragment
         android:id="@+id/nav_gallery"
-        android:name="com.example.navdrawer.ui.gallery.GalleryFragment"
-        android:label="@string/menu_gallery"
+        android:name="com.example.wisproapi.activities.gallery.GalleryFragment"
+        android:label="Gallery"
         tools:layout="@layout/fragment_gallery" />
 
     <fragment
         android:id="@+id/nav_slideshow"
-        android:name="com.example.navdrawer.ui.slideshow.SlideshowFragment"
-        android:label="@string/menu_slideshow"
-        tools:layout="@layout/fragment_slideshow" />
+        android:name="com.example.wisproapi.activities.slideshow.SlideShowFragment"
+        android:label="SlideShow"
+        tools:layout="@layout/fragment_gallery" />
 </navigation>
