@@ -19,7 +19,7 @@ class GalleryFragment : Fragment() {
 
         val root = inflater.inflate(R.layout.fragment_gallery, container, false)
         val textView: TextView = root.findViewById(R.id.text_gallery)
-        textView.text = "Gallery"
+        textView.text = "Metricas"
         return root
     }
 }

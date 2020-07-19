@@ -25,13 +25,14 @@
     <item name="windowActionBar">false</item>
 </style>
         <!-- Base application theme. -->
-        <style name="AppThemeV2" parent="Theme.AppCompat.NoActionBar">
+        <style name="AppThemeV2" parent="Theme.AppCompat.Light.NoActionBar">
             <!-- Customize your theme here. -->
             <item name="colorPrimary">@color/wispro</item>
             <item name="colorPrimaryDark">@color/wispro</item>
             <item name="colorAccent">@color/wispro</item>
             <item name="windowActionBar">false</item>
             <item name="windowNoTitle">true</item>
+            <item name="android:fontFamily">@font/roboto</item>
         </style>
 
         <style name="AppTheme.NoActionBar">
