@@ -9,14 +9,37 @@
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:theme="@style/AppTheme.AppBarOverlay">
+        android:theme="@style/AppTheme.AppBarOverlay"
+        app:elevation="0dp">
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:background="@color/wispro"
-            app:popupTheme="@style/AppTheme.PopupOverlay" />
+            app:popupTheme="@style/AppTheme.PopupOverlay" >
+
+<!--            <RelativeLayout-->
+<!--                android:orientation="vertical"-->
+<!--                android:background="@color/wispro"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_below="@+id/toolbar"-->
+<!--                android:id="@+id/card_view"-->
+<!--                android:layout_width="match_parent">-->
+
+<!--                <TextView-->
+<!--                    android:id="@+id/statuscode"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:fontFamily="@font/roboto"-->
+<!--                    android:padding="10dp"-->
+<!--                    android:textSize="20sp"-->
+<!--                    android:textStyle="bold"-->
+<!--                    android:text="Test"/>-->
+
+
+<!--            </RelativeLayout>-->
+        </androidx.appcompat.widget.Toolbar>
 
     </com.google.android.material.appbar.AppBarLayout>
 
