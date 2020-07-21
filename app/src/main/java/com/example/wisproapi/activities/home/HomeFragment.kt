@@ -13,6 +13,7 @@ import com.example.wisproapi.R
 import com.example.wisproapi.activities.MyRecyclerViewAdapter
 import com.example.wisproapi.retrofit_models.PaymentHandler
 import com.example.wisproapi.viewmodels.PaymentsViewModel
+import com.google.android.material.tabs.TabLayout
 
 class HomeFragment : Fragment() {
 
@@ -25,6 +26,12 @@ class HomeFragment : Fragment() {
 
         val root = inflater.inflate(R.layout.fragment_home, container, false)
         val textView: TextView = root.findViewById(R.id.statuscode)
+
+        var tabLayout:TabLayout = root.findViewById(R.id.tablayout)
+        tabLayout.addTab(tabLayout.newTab().setText("Tab 1"))
+        tabLayout.addTab(tabLayout.newTab().setText("Tab 2"))
+        tabLayout.addTab(tabLayout.newTab().setText("Tab 3"))
+
 
         val view_model: PaymentsViewModel by viewModels()
         view_model.get_live_payment().observe(viewLifecycleOwner, androidx.lifecycle.Observer { new->

@@ -19,11 +19,16 @@
     <item name="android:fontFamily">@font/roboto</item>
     <item name="windowActionBar">false</item>
     <item name="windowNoTitle">true</item>
+    <item name="tabStyle">@style/WhiteFont</item>
 </style>
 <style name="Toolbar" parent="@style/Theme.AppCompat.Light">
     <item name="windowNoTitle">true</item>
     <item name="windowActionBar">false</item>
 </style>
+    <style name="WhiteFont" parent="@style/Theme.AppCompat.Light">
+        <item name="tabSelectedTextColor">@android:color/white</item>
+        <item name="tabTextColor">@android:color/white</item>
+    </style>
         <!-- Base application theme. -->
         <style name="AppThemeV2" parent="Theme.AppCompat.Light.NoActionBar">
             <!-- Customize your theme here. -->
