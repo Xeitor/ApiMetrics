@@ -15,7 +15,13 @@ import androidx.viewpager.widget.ViewPager
 import com.example.wisproapi.R
 import com.example.wisproapi.activities.MyRecyclerViewAdapter
 import com.example.wisproapi.viewmodels.PaymentsViewModel
-
+import kotlinx.android.synthetic.main.fragment_home.*
+import android.content.Context
+import android.view.GestureDetector
+import android.view.GestureDetector.SimpleOnGestureListener
+import android.view.MotionEvent
+import android.view.View.OnTouchListener
+import com.example.wisproapi.OnSwipeTouchListener
 
 class HomeFragment : Fragment() {
 
@@ -47,20 +53,29 @@ class HomeFragment : Fragment() {
 //        }
 
         //Transition listeners
-        sceneRoot.setOnClickListener {
-            TransitionManager.go(anotherScene, fadeTransition)
-        }
-
-        anotherScene.setEnterAction{
-            sceneRoot.setOnClickListener{
-                TransitionManager.go(aScene, fadeTransition)
-            }
-        }
-        aScene.setEnterAction{
-            sceneRoot.setOnClickListener{
+        sceneRoot.setOnTouchListener(object: OnSwipeTouchListener(activity) {
+            override fun onSwipeLeft() {
                 TransitionManager.go(anotherScene, fadeTransition)
             }
-        }
+            override fun onSwipeRight() {
+                TransitionManager.go(aScene, fadeTransition)
+            }
+        })
+
+//        sceneRoot.setOnClickListener {
+//            TransitionManager.go(anotherScene, fadeTransition)
+//        }
+//
+//        anotherScene.setEnterAction{
+//            sceneRoot.setOnClickListener{
+//                TransitionManager.go(aScene, fadeTransition)
+//            }
+//        }
+//        aScene.setEnterAction{
+//            sceneRoot.setOnClickListener{
+//                TransitionManager.go(anotherScene, fadeTransition)
+//            }
+//        }
 
         val view_model: PaymentsViewModel by viewModels()
         view_model.get_live_payment().observe(viewLifecycleOwner, androidx.lifecycle.Observer { new->
