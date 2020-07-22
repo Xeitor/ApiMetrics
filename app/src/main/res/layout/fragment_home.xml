@@ -42,11 +42,21 @@
         android:fontFamily="@font/roboto"
         android:textSize="20sp"
         android:textStyle="bold" />
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/tab_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/view_pager"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/statuscode">
+    </androidx.viewpager.widget.ViewPager>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/reciclerview_widget"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="5dp"
-        android:layout_below="@+id/statuscode"/>
+        android:layout_below="@+id/view_pager"/>
 </RelativeLayout>

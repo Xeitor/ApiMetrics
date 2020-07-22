@@ -21,9 +21,14 @@ import android.view.GestureDetector
 import android.view.GestureDetector.SimpleOnGestureListener
 import android.view.MotionEvent
 import android.view.View.OnTouchListener
+import androidx.viewpager2.widget.ViewPager2
 import com.example.wisproapi.OnSwipeTouchListener
+import com.google.android.material.tabs.TabLayout
 
 class HomeFragment : Fragment() {
+
+    private lateinit var demoCollectionPagerAdapter: PagerAdapter
+    private lateinit var viewPager: ViewPager
 
     var adapter: MyRecyclerViewAdapter? = null
     override fun onCreateView(
@@ -89,5 +94,15 @@ class HomeFragment : Fragment() {
             textView.append("Total: " + view_model.livePayment.value!!.total.toString())
         })
         return root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+
+        demoCollectionPagerAdapter = PagerAdapter(childFragmentManager)
+        viewPager = view.findViewById(R.id.view_pager)
+        viewPager.adapter = demoCollectionPagerAdapter
+
+        val tabLayout:TabLayout = view.findViewById(R.id.tab_layout)
+        tabLayout.setupWithViewPager(viewPager)
     }
 }
