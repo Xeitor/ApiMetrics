@@ -5,25 +5,32 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".activities.gallery.GalleryFragment">
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:id="@+id/tabs"
-        android:background="@color/wispro">
-
-        <androidx.viewpager2.widget.ViewPager2
-            android:id="@+id/pager"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1" />
-
-    </LinearLayout>
+<!--    <LinearLayout-->
+<!--        android:id="@+id/card_view2"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:background="@color/wispro"-->
+<!--        android:gravity="left"-->
+<!--        android:orientation="horizontal"-->
+<!--        android:paddingBottom="10dp"-->
+<!--        android:showDividers="middle">-->
+<!--        <TextView-->
+<!--            android:id="@+id/total2"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:fontFamily="@font/roboto"-->
+<!--            android:padding="20dp"-->
+<!--            android:text="Hoy"-->
+<!--            android:textColor="@color/white"-->
+<!--            android:textSize="11sp"-->
+<!--            android:gravity="center"-->
+<!--            android:layout_gravity="center"/>-->
+<!--    </LinearLayout>-->
     <FrameLayout
         android:id="@+id/scene_root"
         android:layout_height="wrap_content"
-        android:layout_width="match_parent">
+        android:layout_width="match_parent"
+        android:theme="@style/AppTheme.WindowTransition">
         <include layout="@layout/scene_a" android:id="@+id/test1"/>
     </FrameLayout>
 

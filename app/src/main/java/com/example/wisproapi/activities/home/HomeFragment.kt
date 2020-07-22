@@ -55,10 +55,10 @@ class HomeFragment : Fragment() {
         //Transition listeners
         sceneRoot.setOnTouchListener(object: OnSwipeTouchListener(activity) {
             override fun onSwipeLeft() {
-                TransitionManager.go(anotherScene, fadeTransition)
+                TransitionManager.go(anotherScene, fadeTransition2)
             }
             override fun onSwipeRight() {
-                TransitionManager.go(aScene, fadeTransition)
+                TransitionManager.go(aScene, fadeTransition2)
             }
         })
 
