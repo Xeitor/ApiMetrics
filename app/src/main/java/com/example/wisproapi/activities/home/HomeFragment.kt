@@ -38,35 +38,6 @@ class HomeFragment : Fragment() {
     ): View? {
 
         val root = inflater.inflate(R.layout.fragment_home, container, false)
-        val textView: TextView = root.findViewById(R.id.statuscode)
-
-        val sceneRoot: ViewGroup = root.findViewById(R.id.scene_root)
-        val aScene: Scene = Scene.getSceneForLayout(sceneRoot, R.layout.scene_a, this.requireContext())
-        val anotherScene: Scene = Scene.getSceneForLayout(sceneRoot, R.layout.scene_b, this.requireContext())
-
-        var fadeTransition: Transition = Fade()
-
-        var fadeTransition2: Transition =
-            TransitionInflater.from(this.requireContext())
-                .inflateTransition(R.transition.fade_transition)
-
-//        val a:ViewGroup = root.findViewById(R.id.scene_root)
-//        val b:ViewGroup = a.findViewById(R.id.test111)
-//        val c:ViewGroup = a.findViewById(R.id.test222)
-//        sceneRoot.setOnClickListener {
-//            TransitionManager.go(anotherScene, fadeTransition)
-//        }
-
-        //Transition listeners
-        sceneRoot.setOnTouchListener(object: OnSwipeTouchListener(activity) {
-            override fun onSwipeLeft() {
-                TransitionManager.go(anotherScene, fadeTransition2)
-            }
-            override fun onSwipeRight() {
-                TransitionManager.go(aScene, fadeTransition2)
-            }
-        })
-
 //        sceneRoot.setOnClickListener {
 //            TransitionManager.go(anotherScene, fadeTransition)
 //        }
@@ -90,8 +61,6 @@ class HomeFragment : Fragment() {
                 LinearLayoutManager(this.context)
             adapter = MyRecyclerViewAdapter(this.context, view_model.livePayment.value!!.payments)
             recyclerView.adapter = adapter
-
-            textView.append("Total: " + view_model.livePayment.value!!.total.toString())
         })
         return root
     }

@@ -143,7 +143,7 @@
     <color name="Blue">#0000FF</color>
     <color name="MediumBlue">#0000CD</color>
     <color name="DarkBlue">#00008B</color>
-    <color name="Navy">#000080</color>
+    <color name="graytab">#808080</color>
     <color name="Black">#000000</color>
     <color name="MoneyGreen">#23c889</color>
 </resources>
