@@ -15,8 +15,8 @@ class PagerAdapter(fragmentManager: FragmentManager) :
 
     // Returns the fragment to display for that page
     override fun getItem(position: Int): Fragment {
-        var to_return:Fragment = PagerFragment()
-        val fragment = PagerFragment()
+        var to_return:Fragment = MonthFragment()
+        val fragment = MonthFragment()
          when (position) {
             0 -> to_return = fragment
              1 -> to_return = fragment

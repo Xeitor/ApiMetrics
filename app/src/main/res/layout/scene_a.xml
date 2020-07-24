@@ -1,45 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:id="@+id/test222">
-
-<!--    <TextView-->
-<!--        android:id="@+id/totala"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:fontFamily="@font/roboto"-->
-<!--        android:text="Hoy Sep 22"-->
-<!--        android:textColor="@color/white"-->
-<!--        android:textSize="16sp"-->
-<!--        android:gravity="left"-->
-<!--        android:paddingLeft="20dp"-->
-<!--        android:layout_gravity="center"-->
-<!--        android:background="@color/wispro"/>-->
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/test222"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
     <LinearLayout
-        android:id="@+id/card_view"
-        android:layout_width="match_parent"
+        android:id="@+id/subheader"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:background="@color/wispro"
+        android:backgroundTint="@color/wispro"
         android:gravity="left"
         android:orientation="horizontal"
         android:paddingBottom="10dp"
         android:showDividers="middle"
-        android:backgroundTint="@color/wispro">
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/fecha"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:fontFamily="@font/roboto"
+            android:gravity="center"
+            android:padding="20dp"
+            android:paddingTop="1dp"
+            android:text="Hoy\n22 Sep"
+            android:textColor="@color/white"
+            android:textSize="16sp" />
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center"
+            android:background="@color/PowderBlue" />
 
         <TextView
             android:id="@+id/total"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:fontFamily="@font/roboto"
-            android:paddingTop="1dp"
-            android:padding="20dp"
-            android:text="$1.3K\nTotal"
-            android:textColor="@color/white"
-            android:textSize="16sp"
             android:gravity="center"
-            android:layout_gravity="center"/>
+            android:padding="20dp"
+            android:paddingTop="1dp"
+            android:text="$13k\nTotal"
+            android:textColor="@color/white"
+            android:textSize="16sp" />
 
         <View
             android:layout_width="1dp"
@@ -51,34 +60,31 @@
             android:id="@+id/cant_pagos"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:fontFamily="@font/roboto"
+            android:gravity="center"
             android:padding="20dp"
-            android:text="14\nPagos"
+            android:text="16\nPagos"
             android:textColor="@color/white"
             android:textSize="16sp" />
 
         <View
             android:layout_width="1dp"
             android:layout_height="50dp"
-            android:background="@color/PowderBlue"
-            android:layout_gravity="center"/>
+            android:layout_gravity="center"
+            android:background="@color/PowderBlue" />
 
         <TextView
             android:id="@+id/cant_clientes"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:fontFamily="@font/roboto"
+            android:gravity="center"
             android:padding="20dp"
-            android:text="13\nClientes"
+            android:text="10\nClientes"
             android:textColor="@color/white"
             android:textSize="16sp" />
 
     </LinearLayout>
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/reciclerview_widget"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="5dp"
-        android:layout_below="@+id/card_view"/>
-</RelativeLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

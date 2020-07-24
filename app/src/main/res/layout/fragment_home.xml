@@ -3,42 +3,28 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/relative_layouttest"
     tools:context=".activities.gallery.GalleryFragment">
-<!--    <LinearLayout-->
-<!--        android:id="@+id/card_view2"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:background="@color/wispro"-->
-<!--        android:gravity="left"-->
-<!--        android:orientation="horizontal"-->
-<!--        android:paddingBottom="10dp"-->
-<!--        android:showDividers="middle">-->
-<!--        <TextView-->
-<!--            android:id="@+id/total2"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:fontFamily="@font/roboto"-->
-<!--            android:padding="20dp"-->
-<!--            android:text="Hoy"-->
-<!--            android:textColor="@color/white"-->
-<!--            android:textSize="11sp"-->
-<!--            android:gravity="center"-->
-<!--            android:layout_gravity="center"/>-->
-<!--    </LinearLayout>-->
 
-    <com.google.android.material.tabs.TabLayout
-        android:id="@+id/tab_layout"
+    <me.relex.circleindicator.CircleIndicator
+        android:id="@+id/indicator"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/wispro"
-        app:tabSelectedTextColor="@color/white"
-        app:tabTextColor="@color/graytab"/>
-    <androidx.viewpager.widget.ViewPager
+        android:layout_height="20dp"
+        android:background="@color/wispro" />
+
+    <com.example.wisproapi.activities.home.ViewPagerAlpha
         android:id="@+id/view_pager"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/tab_layout">
-    </androidx.viewpager.widget.ViewPager>
+        android:layout_below="@id/indicator"
+        android:layout_weight="1">
 
+    </com.example.wisproapi.activities.home.ViewPagerAlpha>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/recicler_view">
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </RelativeLayout>

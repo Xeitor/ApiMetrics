@@ -146,4 +146,6 @@
     <color name="graytab">#808080</color>
     <color name="Black">#000000</color>
     <color name="MoneyGreen">#23c889</color>
+    <color name="wisproV2">#9ee3ff</color>
+    <color name="wisproV3">#FFA7E6FF</color>
 </resources>
