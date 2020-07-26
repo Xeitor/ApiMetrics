@@ -44,7 +44,7 @@ class WisproRepository {
     fun getMultiplePayments(): Observable<Payment> {
         var list_call: MutableList<Observable<Payment>> = ArrayList()
 
-        list_call.add(requestrx.getmontlyPaymentsRx("2020-07-01T00:00:00.000-03:00","2020-06-01T00:00:00.000-03:00",1,50, "9d168f07-2c58-493d-9d98-55baf59d6f6b"))
+//        list_call.add(requestrx.getmontlyPaymentsRx("2020-07-01T00:00:00.000-03:00","2020-06-01T00:00:00.000-03:00",1,50, "9d168f07-2c58-493d-9d98-55baf59d6f6b"))
         list_call.add(requestrx.getmontlyPaymentsRx("2020-07-01T00:00:00.000-03:00","2020-06-01T00:00:00.000-03:00",1,50, "9d168f07-2c58-493d-9d98-55baf59d6f6b"))
         return Observable.merge(list_call).subscribeOn(Schedulers.newThread()).observeOn(AndroidSchedulers.mainThread())
     }

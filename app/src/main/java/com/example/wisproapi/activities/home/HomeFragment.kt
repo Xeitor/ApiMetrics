@@ -41,7 +41,6 @@ class HomeFragment : Fragment() {
         //ReciclerView fragment setup
         val fragmentManager = activity?.supportFragmentManager
         val fragmentTransaction = fragmentManager?.beginTransaction()
-
         val fragment =
             ReciclerViewFragment()
         fragmentTransaction?.add(R.id.relative_layouttest, fragment)
@@ -50,10 +49,10 @@ class HomeFragment : Fragment() {
         //Initialize ViewModel
         val view_model: PaymentsViewModel by viewModels()
         view_model.get_live_payment()
+
         return root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-
     }
 }

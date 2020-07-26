@@ -27,22 +27,17 @@ class MonthFragment : Fragment() {
     ): View? {
 
         root = inflater.inflate(R.layout.scene_a, container, false)
-        val view_model: PaymentsViewModel by viewModels()
-        PaymentsViewModel.livePayment.observe(viewLifecycleOwner, androidx.lifecycle.Observer { new->
-            val textViewTotal: TextView = root!!.findViewById(R.id.total)
-            textViewTotal.text = "hola"
-        })
-
-        return root
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-//      val textViewDate: TextView = root!!.findViewById(R.id.payment_date)
         val textViewTotal: TextView = root!!.findViewById(R.id.total)
         val textViewCantPagos: TextView = root!!.findViewById(R.id.cant_pagos)
         val textViewCantClientes: TextView = root!!.findViewById(R.id.cant_clientes)
 
+        PaymentsViewModel.livePayment.observe(viewLifecycleOwner, androidx.lifecycle.Observer { new->
+            textViewTotal.text = PaymentsViewModel.livePayment.value!!.total.toString() + "\nTotal"
+            textViewCantPagos.text = PaymentsViewModel.livePayment.value!!.payments.size.toString() + "\nPagos"
+            textViewCantClientes.text = PaymentsViewModel.livePayment.value!!.clientes.size.toString() + "\nClientes"
+
+        })
+
+        return root
     }
 }
