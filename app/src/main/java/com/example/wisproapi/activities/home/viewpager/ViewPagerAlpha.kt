@@ -1,4 +1,4 @@
-package com.example.wisproapi.activities.home
+package com.example.wisproapi.activities.home.viewpager
 
 import android.content.Context
 import android.util.AttributeSet

@@ -1,9 +1,8 @@
-package com.example.wisproapi.activities.home
+package com.example.wisproapi.activities.home.viewpager
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
-import com.example.wisproapi.activities.gallery.GalleryFragment
 
 
 class PagerAdapter(fragmentManager: FragmentManager) :
@@ -15,10 +14,12 @@ class PagerAdapter(fragmentManager: FragmentManager) :
 
     // Returns the fragment to display for that page
     override fun getItem(position: Int): Fragment {
-        var to_return:Fragment = MonthFragment()
-        val fragment = MonthFragment()
+        var to_return:Fragment =
+            MonthFragment()
+        val fragment =
+            MonthFragment()
          when (position) {
-            0 -> to_return = fragment
+             0 -> to_return = fragment
              1 -> to_return = fragment
             else -> null
         }

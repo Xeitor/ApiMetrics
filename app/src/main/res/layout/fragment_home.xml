@@ -13,14 +13,14 @@
         android:layout_height="20dp"
         android:background="@color/wispro" />
 
-    <com.example.wisproapi.activities.home.ViewPagerAlpha
+    <com.example.wisproapi.activities.home.viewpager.ViewPagerAlpha
         android:id="@+id/view_pager"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/indicator"
         android:layout_weight="1">
 
-    </com.example.wisproapi.activities.home.ViewPagerAlpha>
+    </com.example.wisproapi.activities.home.viewpager.ViewPagerAlpha>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"

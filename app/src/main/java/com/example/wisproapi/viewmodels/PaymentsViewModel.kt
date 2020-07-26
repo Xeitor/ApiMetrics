@@ -28,7 +28,6 @@ class PaymentsViewModel:ViewModel() {
     @SuppressLint("CheckResult")
     fun get_live_payment(): MutableLiveData<PaymentHandler> {
         val payment_handler = PaymentHandler()
-
         multiple_payments.subscribe({
             //Onnext
             payment_handler.addPayments(it?.data!!)
