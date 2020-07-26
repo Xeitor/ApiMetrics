@@ -18,7 +18,6 @@ import com.example.wisproapi.viewmodels.PaymentsViewModel
 class ReciclerViewFragment : Fragment() {
 
     var adapter: MyRecyclerViewAdapter? = null
-    var payment_handler: MutableLiveData<PaymentHandler> = MutableLiveData()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -30,16 +29,13 @@ class ReciclerViewFragment : Fragment() {
 //        val textView: TextView = root.findViewById(R.id.text_slideshow)
 //        textView.text = "Ajustes"
 
-        val view_model: PaymentsViewModel by viewModels()
-        view_model.get_live_payment().observe(viewLifecycleOwner, androidx.lifecycle.Observer { new->
+        PaymentsViewModel.livePayment.observe(viewLifecycleOwner, androidx.lifecycle.Observer { new->
             //SetupReciclerView
             val recyclerView: RecyclerView = root!!.findViewById(R.id.reciclerview_widget)
             recyclerView.layoutManager =
                 LinearLayoutManager(this.context)
-            adapter = MyRecyclerViewAdapter(this.context, view_model.livePayment.value!!.payments)
+            adapter = MyRecyclerViewAdapter(this.context, PaymentsViewModel.livePayment.value!!.payments)
             recyclerView.adapter = adapter
-            payment_handler = view_model.livePayment
-
         })
         return root
     }

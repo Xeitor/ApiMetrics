@@ -7,15 +7,19 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.wisproapi.R
 import com.example.wisproapi.activities.MyRecyclerViewAdapter
+import com.example.wisproapi.retrofit_models.PaymentHandler
 import com.example.wisproapi.viewmodels.PaymentsViewModel
 
 class MonthFragment : Fragment() {
     var adapter: MyRecyclerViewAdapter? = null
+    var payment_handler: MutableLiveData<PaymentHandler> = MutableLiveData()
     private var root: View? = null
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -23,6 +27,12 @@ class MonthFragment : Fragment() {
     ): View? {
 
         root = inflater.inflate(R.layout.scene_a, container, false)
+        val view_model: PaymentsViewModel by viewModels()
+        PaymentsViewModel.livePayment.observe(viewLifecycleOwner, androidx.lifecycle.Observer { new->
+            val textViewTotal: TextView = root!!.findViewById(R.id.total)
+            textViewTotal.text = "hola"
+        })
+
         return root
     }
 

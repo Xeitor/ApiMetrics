@@ -5,11 +5,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import com.example.wisproapi.activities.MyRecyclerViewAdapter
 import com.example.wisproapi.R
 import com.example.wisproapi.activities.home.viewpager.PagerAdapter
 import com.example.wisproapi.activities.home.viewpager.ReciclerViewFragment
 import com.example.wisproapi.activities.home.viewpager.ViewPagerAlpha
+import com.example.wisproapi.viewmodels.PaymentsViewModel
 import me.relex.circleindicator.CircleIndicator
 
 class HomeFragment : Fragment() {
@@ -45,7 +47,9 @@ class HomeFragment : Fragment() {
         fragmentTransaction?.add(R.id.relative_layouttest, fragment)
         fragmentTransaction?.commit()
 
-
+        //Initialize ViewModel
+        val view_model: PaymentsViewModel by viewModels()
+        view_model.get_live_payment()
         return root
     }
 

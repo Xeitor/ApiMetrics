@@ -21,9 +21,11 @@ class PaymentsViewModel:ViewModel() {
     //Making call with WisproRepository
     var payment: Observable<Payment?>? = wisproRepository.getPaymentsRx()
     var multiple_payments = wisproRepository.getMultiplePayments()
+    companion object {
+        val livePayment: MutableLiveData<PaymentHandler> by lazy {
+            MutableLiveData<PaymentHandler>()
+        }
 
-    val livePayment: MutableLiveData<PaymentHandler> by lazy {
-        MutableLiveData<PaymentHandler>()
     }
     @SuppressLint("CheckResult")
     fun get_live_payment(): MutableLiveData<PaymentHandler> {
