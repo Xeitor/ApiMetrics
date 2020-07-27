@@ -14,16 +14,10 @@ class PagerAdapter(fragmentManager: FragmentManager) :
 
     // Returns the fragment to display for that page
     override fun getItem(position: Int): Fragment {
-        var to_return:Fragment =
-            MonthFragment()
-        val fragment =
-            MonthFragment()
-         when (position) {
-             0 -> to_return = fragment
-             1 -> to_return = fragment
-            else -> null
-        }
-        return to_return
+        if (position == 0)
+            return TodayFragment()
+        else
+            return MonthFragment()
     }
 
     // Returns the page title for the top indicator

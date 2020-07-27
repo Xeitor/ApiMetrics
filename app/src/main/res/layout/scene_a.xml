@@ -29,7 +29,7 @@
             android:paddingTop="1dp"
             android:text="Hoy\n22 Sep"
             android:textColor="@color/white"
-            android:textSize="16sp" />
+            android:textSize="14sp" />
 
         <View
             android:layout_width="1dp"
@@ -48,7 +48,7 @@
             android:paddingTop="1dp"
             android:text="$13k\nTotal"
             android:textColor="@color/white"
-            android:textSize="16sp" />
+            android:textSize="14sp" />
 
         <View
             android:layout_width="1dp"
@@ -66,7 +66,7 @@
             android:padding="20dp"
             android:text="16\nPagos"
             android:textColor="@color/white"
-            android:textSize="16sp" />
+            android:textSize="14sp" />
 
         <View
             android:layout_width="1dp"
@@ -84,7 +84,7 @@
             android:padding="20dp"
             android:text="10\nClientes"
             android:textColor="@color/white"
-            android:textSize="16sp" />
+            android:textSize="14sp" />
 
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
