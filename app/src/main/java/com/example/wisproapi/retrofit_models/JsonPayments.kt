@@ -10,7 +10,7 @@ import io.reactivex.Observable
 
 interface JsonPayments {
     @GET("/api/v1/invoicing/payments")
-    fun getPostsV2(@Query("page") page: Int, @Query("per_page") per_page: Int, @Header("Authorization") authorization: String): Call<Payment>
+    fun getPostsV2(@Query("payment_date_before") payment_date_before: String,@Query("payment_date_after") payment_date_after: String, @Query("page") page: Int, @Query("per_page") per_page: Int, @Header("Authorization") authorization: String): Call<Payment>
 
     @GET("/api/v1/invoicing/payments")
     fun getPostsRx(@Query("page") page: Int, @Query("per_page") per_page: Int, @Header("Authorization") authorization: String): Observable<Payment>

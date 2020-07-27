@@ -26,8 +26,6 @@ class ReciclerViewFragment : Fragment() {
     ): View? {
 
         val root = inflater.inflate(R.layout.fragment_recicler_view, container, false)
-//        val textView: TextView = root.findViewById(R.id.text_slideshow)
-//        textView.text = "Ajustes"
 
         PaymentsViewModel.livePayment.observe(viewLifecycleOwner, androidx.lifecycle.Observer { new->
             //SetupReciclerView
