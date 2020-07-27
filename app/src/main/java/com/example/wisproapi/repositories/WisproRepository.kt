@@ -47,17 +47,17 @@ class WisproRepository {
     //Implemenatation with list of calls
     fun getMultiplePayments(): Observable<Payment> {
         var list_call: MutableList<Observable<Payment>> = ArrayList()
-        var base_request: Call<Payment> = request.getPostsV2("2020-07-01T00:00:00.000-03:00","2020-06-01T00:00:00.000-03:00",1,50, "9d168f07-2c58-493d-9d98-55baf59d6f6b")
+        var base_request: Call<Payment> = request.getPostsV2("2020-07-01T00:00:00.000-03:00","2020-05-01T00:00:00.000-03:00",1,50, "9d168f07-2c58-493d-9d98-55baf59d6f6b")
         var total_pages: Int = getTotalPagesHelper(base_request)
         for (x in 1..total_pages) {
-            list_call.add(requestrx.getmontlyPaymentsRx("2020-07-01T00:00:00.000-03:00","2020-06-01T00:00:00.000-03:00",x,50, "9d168f07-2c58-493d-9d98-55baf59d6f6b"))
+            list_call.add(requestrx.getmontlyPaymentsRx("2020-07-01T00:00:00.000-03:00","2020-05-01T00:00:00.000-03:00",x,50, "9d168f07-2c58-493d-9d98-55baf59d6f6b"))
         }
 //        list_call.add(requestrx.getmontlyPaymentsRx("2020-07-01T00:00:00.000-03:00","2020-06-01T00:00:00.000-03:00",1,50, "9d168f07-2c58-493d-9d98-55baf59d6f6b"))
         return Observable.merge(list_call).subscribeOn(Schedulers.newThread()).observeOn(AndroidSchedulers.mainThread())
     }
     fun getTotalPagesHelper(request2: Call<Payment>): Int {
         var total_pages: Int = 1
-        var total_pages_from_request = request2.execute().body()?.pagination?.total_pages?.toInt()
+        var total_pages_from_request = request2.execute().body()?.meta?.pagination_info?.total_pages?.toInt()
         if (total_pages_from_request != null) {
             return total_pages_from_request
         } else return total_pages
