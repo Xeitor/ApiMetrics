@@ -1,5 +1,10 @@
 package com.example.wisproapi.retrofit_models
 
+import java.text.SimpleDateFormat
+import java.util.*
+import kotlin.collections.ArrayList
+import kotlin.collections.HashSet
+
 class PaymentHandler() {
 
     var payments: MutableList<PaymentObject> = ArrayList()
@@ -10,17 +15,20 @@ class PaymentHandler() {
     var dayly_total: Float = 0F
     var dayly_clients: HashSet<String> = HashSet()
 
-    var total_daily_cool_format: String? = "00"
 
     fun addPayments(toAdd: List<PaymentObject>) {
         var aux: Float = 0F
+        //DateTime
+        val sdf = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ", Locale.getDefault())
+        val currentDateandTime = sdf.format(Calendar.getInstance().time).substring(0,10)
+
         for (payment in toAdd) {
             payments.add(payment)
             clientes.add(payment.client_name.toString())
             var temp: String = payment.amount + "F"
             aux += temp.toFloat()
 
-            if (payment.payment_date!!.contains("2020-05-06")) {
+            if (payment.payment_date!!.contains(currentDateandTime)) {
                 dayly_clients.add(payment.client_name.toString())
                 dayly_payments++
                 var temp: String = payment.amount + "F"
