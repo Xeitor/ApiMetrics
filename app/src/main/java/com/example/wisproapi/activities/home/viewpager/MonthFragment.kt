@@ -32,7 +32,7 @@ class MonthFragment : Fragment() {
         val textViewCantPagos: TextView = root!!.findViewById(R.id.cant_pagos)
         val textViewCantClientes: TextView = root!!.findViewById(R.id.cant_clientes)
         val fecha: TextView = root!!.findViewById(R.id.fecha)
-        fecha.text = "Mensual" + "\n" + CustomDate.getMonth()
+        fecha.text = CustomDate.currentDateandTime
         PaymentsViewModel.livePayment.observe(viewLifecycleOwner, androidx.lifecycle.Observer { new->
             textViewTotal.text = "$ " + coolFormat(PaymentsViewModel.livePayment.value!!.total.toDouble(), 0) + "\nTotal"
             textViewCantPagos.text = PaymentsViewModel.livePayment.value!!.payments.size.toString() + "\nPagos"

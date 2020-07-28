@@ -64,6 +64,24 @@ class WisproRepository {
         //Returns merged listcall
         return Observable.merge(list_call).subscribeOn(Schedulers.newThread()).observeOn(AndroidSchedulers.mainThread())
     }
+
+    fun getMultiplePaymentsRefresh(): Observable<Payment> {
+        //DateTime
+        var datetime = CustomDate.currentDateandTime
+
+        //BaseRequest Setup and list of calls
+        var list_call: MutableList<Observable<Payment>> = ArrayList()
+        var base_request: Call<Payment> = request.getPostsV2(datetime,1,50, "0e4eb360-e15e-4968-bda4-1c0edf58c938")
+        var total_pages: Int = getTotalPagesHelper(base_request)
+
+        for (x in 1..total_pages) {
+            list_call.add(requestrx.getmontlyPaymentsRxV2(datetime,x,50, "0e4eb360-e15e-4968-bda4-1c0edf58c938"))
+        }
+
+        //Returns merged listcall
+        return Observable.merge(list_call).subscribeOn(Schedulers.newThread()).observeOn(AndroidSchedulers.mainThread())
+    }
+
     fun getTotalPagesHelper(request2: Call<Payment>): Int {
         var total_pages: Int = 1
         var total_pages_from_request = request2.execute().body()?.meta?.pagination_info?.total_pages?.toInt()
