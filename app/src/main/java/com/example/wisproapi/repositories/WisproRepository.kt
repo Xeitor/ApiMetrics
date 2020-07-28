@@ -1,6 +1,7 @@
 package com.example.wisproapi.repositories
 
 import androidx.lifecycle.MutableLiveData
+import com.example.wisproapi.CustomDate
 import com.example.wisproapi.retrofit_models.JsonPayments
 import com.example.wisproapi.retrofit_models.Payment
 import com.example.wisproapi.retrofit_models.ServiceBuilder
@@ -50,27 +51,15 @@ class WisproRepository {
     //Implemenatation with list of calls
     fun getMultiplePayments(): Observable<Payment> {
         //DateTime
-        val sdf = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ", Locale.getDefault())
-        val currentDateandTime = sdf.format(Calendar.getInstance().time)
-
-        val text = StringBuffer(currentDateandTime)
-        text.replace(11, 23, "00:00:00.000")
-        text.replace(8,10,"01")
-
-        var monthBeggin: String
-        val myNameChars = currentDateandTime.toCharArray()
-        myNameChars[8] = '0'
-        myNameChars[9] = '1'
-        monthBeggin = String(myNameChars)
-
+        var datetime = CustomDate.getMonthBegginng()
 
         //BaseRequest Setup and list of calls
         var list_call: MutableList<Observable<Payment>> = ArrayList()
-        var base_request: Call<Payment> = request.getPostsV2(text.toString(),1,50, "9d168f07-2c58-493d-9d98-55baf59d6f6b")
+        var base_request: Call<Payment> = request.getPostsV2(datetime,1,50, "9d168f07-2c58-493d-9d98-55baf59d6f6b")
         var total_pages: Int = getTotalPagesHelper(base_request)
 
         for (x in 1..total_pages) {
-            list_call.add(requestrx.getmontlyPaymentsRxV2(text.toString(),x,50, "9d168f07-2c58-493d-9d98-55baf59d6f6b"))
+            list_call.add(requestrx.getmontlyPaymentsRxV2(datetime,x,50, "9d168f07-2c58-493d-9d98-55baf59d6f6b"))
         }
 
         //Returns merged listcall
