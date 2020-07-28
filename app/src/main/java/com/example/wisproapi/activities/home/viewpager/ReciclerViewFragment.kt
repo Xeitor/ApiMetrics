@@ -32,7 +32,7 @@ class ReciclerViewFragment : Fragment() {
             Thread(Runnable {
                 try {
                     val view_model: PaymentsViewModel by viewModels()
-                    view_model.get_refresh()
+                    view_model.get_live_payment()
                     swipe_refresh_layout.isRefreshing = false;
                 } catch (ex: Exception) {
                     ex.printStackTrace()

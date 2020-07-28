@@ -15,6 +15,7 @@ class MyRecyclerViewAdapter internal constructor(
     data: List<PaymentObject>
 ) :
     RecyclerView.Adapter<MyRecyclerViewAdapter.ViewHolder>() {
+
     private val mData: List<PaymentObject> = data
     private val mInflater: LayoutInflater = LayoutInflater.from(context)
     private var mClickListener: ItemClickListener? = null

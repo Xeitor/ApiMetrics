@@ -28,14 +28,13 @@ class PaymentsViewModel:ViewModel() {
     var multiple_paymentsV2 = wisproRepository.getPaymentsRxV2(requestrx.getmontlyPaymentsRx("2020-03-01T00:00:00.000-03:00","2020-03-01T00:00:00.000-03:00",2,100, "9d168f07-2c58-493d-9d98-55baf59d6f6b"))
 
     companion object {
-        val payment_handler = PaymentHandler()
         val livePayment: MutableLiveData<PaymentHandler> by lazy {
             MutableLiveData<PaymentHandler>()
         }
     }
     @SuppressLint("CheckResult")
     fun get_live_payment(): MutableLiveData<PaymentHandler> {
-
+        val payment_handler = PaymentHandler()
         multiple_payments.subscribe({
             //Onnext
             payment_handler.addPayments(it?.data!!)
@@ -49,6 +48,7 @@ class PaymentsViewModel:ViewModel() {
     }
     @SuppressLint("CheckResult")
     fun get_refresh(): MutableLiveData<PaymentHandler> {
+        val payment_handler = PaymentHandler()
         multiple_payments_refresh.subscribe({
             //Onnext
             payment_handler.addPayments(it?.data!!)
