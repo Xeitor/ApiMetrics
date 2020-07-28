@@ -3,16 +3,14 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout.OnRefreshListener
 import com.example.wisproapi.R
 import com.example.wisproapi.activities.MyRecyclerViewAdapter
-import com.example.wisproapi.retrofit_models.PaymentHandler
 import com.example.wisproapi.viewmodels.PaymentsViewModel
 
 class ReciclerViewFragment : Fragment() {
@@ -26,6 +24,23 @@ class ReciclerViewFragment : Fragment() {
     ): View? {
 
         val root = inflater.inflate(R.layout.fragment_recicler_view, container, false)
+
+        val swipe_refresh_layout: SwipeRefreshLayout = root!!.findViewById(R.id.swiperefresh)
+        val top_to_padding = 100
+
+        swipe_refresh_layout.setOnRefreshListener(OnRefreshListener {
+            Thread(Runnable {
+                try {
+                    swipe_refresh_layout.isRefreshing = true;
+                    val view_model: PaymentsViewModel by viewModels()
+                    view_model.get_live_payment()
+                    swipe_refresh_layout.isRefreshing = false;
+                } catch (ex: Exception) {
+                    ex.printStackTrace()
+                }
+            }).start()
+        })
+
 
         PaymentsViewModel.livePayment.observe(viewLifecycleOwner, androidx.lifecycle.Observer { new->
             //SetupReciclerView

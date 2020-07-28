@@ -41,14 +41,11 @@ class HomeFragment : Fragment() {
         //ReciclerView fragment setup
         val fragmentManager = activity?.supportFragmentManager
         val fragmentTransaction = fragmentManager?.beginTransaction()
-        val fragment =
-            ReciclerViewFragment()
+        val fragment = ReciclerViewFragment()
         fragmentTransaction?.add(R.id.relative_layouttest, fragment)
         fragmentTransaction?.commit()
 
-//        //Initialize ViewModel
-//        val view_model: PaymentsViewModel by viewModels()
-//        view_model.get_live_payment()
+        //Initialize viewmodel
         Thread(Runnable {
             try {
                 val view_model: PaymentsViewModel by viewModels()
