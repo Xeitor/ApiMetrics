@@ -34,12 +34,22 @@ class MonthFragment : Fragment() {
         fecha.text = "Mensual" + "\n" + "Sep"
 
         PaymentsViewModel.livePayment.observe(viewLifecycleOwner, androidx.lifecycle.Observer { new->
-            textViewTotal.text = PaymentsViewModel.livePayment.value!!.total.toString() + "\nTotal"
+            textViewTotal.text = "$ " + coolFormat(PaymentsViewModel.livePayment.value!!.total.toDouble(), 0) + "\nTotal"
             textViewCantPagos.text = PaymentsViewModel.livePayment.value!!.payments.size.toString() + "\nPagos"
             textViewCantClientes.text = PaymentsViewModel.livePayment.value!!.clientes.size.toString() + "\nClientes"
 
         })
 
         return root
+    }
+    private val c = charArrayOf('k', 'm', 'b', 't')
+    private fun coolFormat(n: Double, iteration: Int): String? {
+        val d = n.toLong() / 100 / 10.0
+        val isRound =
+            d * 10 % 10 == 0.0 //true if the decimal part is equal to 0 (then it's trimmed anyway)
+        return if (d < 1000) //this determines the class, i.e. 'k', 'm' etc
+            (if (d > 99.9 || isRound || !isRound && d > 9.99) //this decides whether to trim the decimals
+                d.toInt() * 10 / 10 else d.toString() + "" // (int) d * 10 / 10 drops the decimal
+                    ).toString() + "" + c[iteration] else coolFormat(d, iteration + 1)
     }
 }
