@@ -46,7 +46,7 @@
             android:gravity="center"
             android:padding="20dp"
             android:paddingTop="1dp"
-            android:text="$13k\nTotal"
+            android:text="$...k\nTotal"
             android:textColor="@color/white"
             android:textSize="14sp" />
 
@@ -64,7 +64,7 @@
             android:fontFamily="@font/roboto"
             android:gravity="center"
             android:padding="20dp"
-            android:text="16\nPagos"
+            android:text="...\nPagos"
             android:textColor="@color/white"
             android:textSize="14sp" />
 
@@ -82,7 +82,7 @@
             android:fontFamily="@font/roboto"
             android:gravity="center"
             android:padding="20dp"
-            android:text="10\nClientes"
+            android:text="...\nClientes"
             android:textColor="@color/white"
             android:textSize="14sp" />
 
