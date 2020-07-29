@@ -12,6 +12,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout.OnRefreshListener
 import com.example.wisproapi.R
 import com.example.wisproapi.activities.MyRecyclerViewAdapter
 import com.example.wisproapi.viewmodels.PaymentsViewModel
+import java.util.*
 
 class ReciclerViewFragment : Fragment() {
 
@@ -46,7 +47,8 @@ class ReciclerViewFragment : Fragment() {
             val recyclerView: RecyclerView = root!!.findViewById(R.id.reciclerview_widget)
             recyclerView.layoutManager =
                 LinearLayoutManager(this.context)
-            adapter = MyRecyclerViewAdapter(this.context, PaymentsViewModel.livePayment.value!!.payments)
+//            val list_Test = Collections.reverse(aymentsViewModel.livePayment.value!!.payments)
+            adapter = MyRecyclerViewAdapter(this.context, PaymentsViewModel.livePayment.value!!.payments.reversed())
             recyclerView.adapter = adapter
         })
         return root
