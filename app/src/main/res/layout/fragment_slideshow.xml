@@ -5,16 +5,25 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".activities.gallery.GalleryFragment"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:gravity="center_horizontal">
+
+    <TextView
+        android:id="@+id/isp_id_actual"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="5dp"
+        android:textSize="15sp"/>
+
     <TextView
         android:id="@+id/isp_id_info"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="5dp"
-        android:text="Ingrese el token autenticador de API:"
+        android:text="Ingrese su token autenticador de API:"
         android:textSize="15sp"/>
 
-<!--    <EditText-->
+    <!--    <EditText-->
 <!--        android:id="@+id/isp_id_input"-->
 <!--        android:layout_width="wrap_content"-->
 <!--        android:layout_height="wrap_content"-->
@@ -41,5 +50,7 @@
         android:layout_height="wrap_content"
         android:layout_width="wrap_content"
         android:text="Guardar"
-        android:padding="5dp"/>
+        android:layout_margin="10dp"
+        android:background="@color/wispro"
+        android:textColor="@color/white" />
 </LinearLayout>
