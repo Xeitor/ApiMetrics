@@ -1,11 +1,9 @@
 package com.example.wisproapi.viewmodels
 
 import android.annotation.SuppressLint
+import android.app.Application
 import android.view.View
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.SavedStateHandle
-import androidx.lifecycle.ViewModel
+import androidx.lifecycle.*
 import com.example.wisproapi.repositories.WisproRepository
 import com.example.wisproapi.retrofit_models.JsonPayments
 import com.example.wisproapi.retrofit_models.Payment
@@ -15,8 +13,8 @@ import io.reactivex.Observable
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-class PaymentsViewModel:ViewModel() {
-    var wisproRepository = WisproRepository()
+class PaymentsViewModel(application: Application) : AndroidViewModel(application) {
+    var wisproRepository = WisproRepository(application)
     val request = ServiceBuilder.buildService(JsonPayments::class.java)
     val requestrx = ServiceBuilder.buildServiceRx(JsonPayments::class.java)
 

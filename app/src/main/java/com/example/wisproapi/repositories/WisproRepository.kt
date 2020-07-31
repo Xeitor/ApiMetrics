@@ -1,5 +1,8 @@
 package com.example.wisproapi.repositories
 
+import android.content.Context
+import android.content.Context.MODE_PRIVATE
+import android.content.SharedPreferences
 import androidx.lifecycle.MutableLiveData
 import com.example.wisproapi.CustomDate
 import com.example.wisproapi.retrofit_models.JsonPayments
@@ -11,15 +14,15 @@ import io.reactivex.schedulers.Schedulers
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import java.text.SimpleDateFormat
-import java.util.*
-import kotlin.collections.ArrayList
 
-class WisproRepository {
+
+class WisproRepository(context: Context) {
 
     val request = ServiceBuilder.buildService(JsonPayments::class.java)
     val requestrx = ServiceBuilder.buildServiceRx(JsonPayments::class.java)
 
+    var prefs: SharedPreferences = context.getSharedPreferences("isp_information", MODE_PRIVATE)
+    var isp_id = prefs.getString("isp_id", "") //"No name defined" is the default value.
 
     //Return payments observable, receives calls
     fun getPaymentsRx(): Observable<Payment?>? {
@@ -54,11 +57,11 @@ class WisproRepository {
 
         //BaseRequest Setup and list of calls
         var list_call: MutableList<Observable<Payment>> = ArrayList()
-        var base_request: Call<Payment> = request.getPostsV2(datetime,1,50, "0e4eb360-e15e-4968-bda4-1c0edf58c938")
+        var base_request: Call<Payment> = request.getPostsV2(datetime,1,50, isp_id!!)
         var total_pages: Int = getTotalPagesHelper(base_request)
 
         for (x in 1..total_pages) {
-            list_call.add(requestrx.getmontlyPaymentsRxV2(datetime,x,50, "0e4eb360-e15e-4968-bda4-1c0edf58c938"))
+            list_call.add(requestrx.getmontlyPaymentsRxV2(datetime,x,50, isp_id!!))
         }
 
         //Returns merged listcall

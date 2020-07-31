@@ -1,11 +1,8 @@
 package com.example.wisproapi.activities
 
+import android.content.Context
 import android.os.Bundle
 import android.view.Menu
-import android.view.View
-import android.widget.TextView
-import android.widget.Toast
-import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.drawerlayout.widget.DrawerLayout
@@ -14,15 +11,11 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
-import androidx.recyclerview.widget.DividerItemDecoration
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.example.wisproapi.R
-import com.example.wisproapi.retrofit_models.PaymentHandler
-import com.example.wisproapi.viewmodels.PaymentsViewModel
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.navigation.NavigationView
 import com.google.android.material.snackbar.Snackbar
+
 
 class MainActivity : AppCompatActivity() {
 
@@ -48,6 +41,10 @@ class MainActivity : AppCompatActivity() {
             R.id.nav_home, R.id.nav_gallery, R.id.nav_slideshow), drawerLayout)
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
+
+        val editor = getSharedPreferences("isp_information", Context.MODE_PRIVATE).edit()
+        editor.putString("isp_id", "0e4eb360-e15e-4968-bda4-1c0edf58c938")
+        editor.apply()
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
