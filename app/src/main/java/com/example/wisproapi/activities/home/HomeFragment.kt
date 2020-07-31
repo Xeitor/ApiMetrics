@@ -18,8 +18,9 @@ class HomeFragment : Fragment() {
 
     private lateinit var demoCollectionPagerAdapter: PagerAdapter
     private lateinit var viewPager: ViewPagerAlpha
-
+    val view_model: PaymentsViewModel by viewModels()
     var adapter: MyRecyclerViewAdapter? = null
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -48,7 +49,6 @@ class HomeFragment : Fragment() {
         //Initialize viewmodel
         Thread(Runnable {
             try {
-                val view_model: PaymentsViewModel by viewModels()
                 view_model.get_live_payment()
             } catch (ex: Exception) {
                 ex.printStackTrace()
@@ -57,4 +57,14 @@ class HomeFragment : Fragment() {
         return root
     }
 
+    override fun onResume() {
+        super.onResume()
+        Thread(Runnable {
+            try {
+                view_model.get_live_payment()
+            } catch (ex: Exception) {
+                ex.printStackTrace()
+            }
+        }).start()
+    }
 }

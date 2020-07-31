@@ -43,7 +43,7 @@ class MainActivity : AppCompatActivity() {
         navView.setupWithNavController(navController)
 
         val editor = getSharedPreferences("isp_information", Context.MODE_PRIVATE).edit()
-        editor.putString("isp_id", "0e4eb360-e15e-4968-bda4-1c0edf58c938")
+        editor.putString("isp_id", "9d168f07-2c58-493d-9d98-55baf59d6f6b")
         editor.apply()
     }
 
