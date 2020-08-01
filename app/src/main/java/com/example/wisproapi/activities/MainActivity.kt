@@ -42,9 +42,9 @@ class MainActivity : AppCompatActivity() {
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
 
-        val editor = getSharedPreferences("isp_information", Context.MODE_PRIVATE).edit()
-        editor.putString("isp_id", "9d168f07-2c58-493d-9d98-55baf59d6f6b")
-        editor.apply()
+//        val editor = getSharedPreferences("isp_information", Context.MODE_PRIVATE).edit()
+//        editor.putString("isp_id", "")
+//        editor.apply()
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {

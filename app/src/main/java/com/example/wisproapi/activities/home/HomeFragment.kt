@@ -1,9 +1,12 @@
 package com.example.wisproapi.activities.home
 
+import android.content.Context
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.example.wisproapi.R
@@ -54,6 +57,14 @@ class HomeFragment : Fragment() {
                 ex.printStackTrace()
             }
         }).start()
+
+        var missing_token_text_view: TextView = root.findViewById(R.id.text_gallery)
+
+        var prefs: SharedPreferences = requireActivity().getSharedPreferences("isp_information", Context.MODE_PRIVATE)
+        var isp_id = prefs.getString("isp_id", null) //"No name defined" is the default value.
+
+        if (isp_id.isNullOrEmpty()) missing_token_text_view.text = "Ups! Al parecer aún no configuras un token id.\nDirígite a la ventana de ajustes para hacerlo"
+
         return root
     }
 

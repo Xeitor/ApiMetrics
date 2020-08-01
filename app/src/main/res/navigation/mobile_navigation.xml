@@ -6,17 +6,16 @@
     app:startDestination="@+id/nav_home">
 
     <fragment
+        android:id="@+id/nav_gallery"
+        android:name="com.example.wisproapi.activities.gallery.GalleryFragment"
+        android:label="Metricas"
+        tools:layout="@layout/fragment_gallery" />
+    <fragment
         android:id="@+id/nav_home"
         android:name="com.example.wisproapi.activities.home.HomeFragment"
         android:label="Pagos"
         tools:layout="@layout/fragment_gallery">
     </fragment>
-
-    <fragment
-        android:id="@+id/nav_gallery"
-        android:name="com.example.wisproapi.activities.gallery.GalleryFragment"
-        android:label="Metricas"
-        tools:layout="@layout/fragment_gallery" />
 
     <fragment
         android:id="@+id/nav_slideshow"
