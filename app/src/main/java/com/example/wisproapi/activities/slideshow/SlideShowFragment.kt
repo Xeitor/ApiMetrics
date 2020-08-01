@@ -21,6 +21,7 @@ import com.example.wisproapi.R
 import com.example.wisproapi.repositories.WisproRepository
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.textfield.TextInputLayout
+import es.dmoral.toasty.Toasty
 
 class SlideShowFragment : Fragment() {
 
@@ -58,17 +59,11 @@ class SlideShowFragment : Fragment() {
                     val editor = context?.getSharedPreferences("isp_information", Context.MODE_PRIVATE)?.edit()
                     editor?.putString("isp_id", strUsername)
                     editor?.apply()
-                    btn.revertAnimation()
-                    val text = "Hello toast!"
-                    val duration = Toast.LENGTH_SHORT
-
-                    val toast = Toast.makeText(requireActivity(), text, duration)
-                    toast.setGravity(Gravity.CENTER_VERTICAL, 0, 0)
-                    toast.show()
+                    Toasty.success(requireActivity(), "Token configurado correctamente!", Toast.LENGTH_SHORT, true).show()
                 } else{
-
-                    btn.revertAnimation()
+                    Toasty.error(requireActivity(), "Token invalido", Toast.LENGTH_SHORT, true).show()
                 }
+                btn.revertAnimation()
             }, {
                 //Onerror
             })
