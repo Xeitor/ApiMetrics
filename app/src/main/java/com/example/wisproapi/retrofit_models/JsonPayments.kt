@@ -21,4 +21,7 @@ interface JsonPayments {
     @GET("/api/v1/invoicing/payments")
     fun getmontlyPaymentsRxV2(@Query("payment_date_after") payment_date_after: String, @Query("page") page: Int, @Query("per_page") per_page: Int, @Header("Authorization") authorization: String): Observable<Payment>
 
+    @GET("/api/v1/invoicing/payments")
+    fun getIspIdTest(@Query("page") page: Int, @Query("per_page") per_page: Int, @Header("Authorization") authorization: String): Observable<Payment>
+
 }

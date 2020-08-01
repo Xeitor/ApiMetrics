@@ -4,6 +4,7 @@ package com.example.wisproapi.activities.slideshow
 import android.content.Context
 import android.content.SharedPreferences
 import android.os.Bundle
+import android.os.SystemClock.sleep
 import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
@@ -12,7 +13,10 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.MutableLiveData
+import br.com.simplepass.loadingbutton.customViews.CircularProgressButton
 import com.example.wisproapi.R
+import com.example.wisproapi.repositories.WisproRepository
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.textfield.TextInputLayout
 
@@ -26,22 +30,40 @@ class SlideShowFragment : Fragment() {
 
         var root: View = inflater.inflate(R.layout.fragment_slideshow, container, false)
 //        val textView: EditText = root.findViewById(R.id.isp_id_input)
-        var button: Button = root.findViewById(R.id.save_button)
-
+        var editText: TextView = root.findViewById(R.id.isp_id_actual)
         //Get current ispvalue
         var prefs: SharedPreferences = requireActivity().getSharedPreferences("isp_information", Context.MODE_PRIVATE)
-        var isp_id = prefs.getString("isp_id", "") //"No name defined" is the default value.
+         //"No name defined" is the default value.
+        var live_isp_id: MutableLiveData<String> = MutableLiveData()
+        var isp_id = prefs.getString("isp_id", "")
+        live_isp_id.value = isp_id
 
-        var editText: TextView = root.findViewById(R.id.isp_id_actual)
-        editText.text = "Token actual: $isp_id"
+        live_isp_id.observe(viewLifecycleOwner, androidx.lifecycle.Observer { new->
+            editText.text = "Token actual: " + live_isp_id.value
+        })
 
-        button.setOnClickListener {
+        var btn: CircularProgressButton =  root.findViewById(R.id.btn_id)
+        btn.setOnClickListener {
             btnValidateInputClick(root)
+            btn.startAnimation()
+
             val layoutUserName = requireView().findViewById(R.id.layoutIspId) as TextInputLayout
             val strUsername: String = layoutUserName.editText!!.text.toString()
-            val editor = context?.getSharedPreferences("isp_information", Context.MODE_PRIVATE)?.edit()
-            editor?.putString("isp_id", strUsername)
-            editor?.apply()
+            WisproRepository(requireActivity()).checkIspId(strUsername).subscribe({
+                //Onnext
+                if (it.status!!.equals(200)) {
+                    live_isp_id.value = strUsername
+                    val editor = context?.getSharedPreferences("isp_information", Context.MODE_PRIVATE)?.edit()
+                    editor?.putString("isp_id", strUsername)
+                    editor?.apply()
+                    btn.revertAnimation()
+                } else{
+                    
+                    btn.revertAnimation()
+                }
+            }, {
+                //Onerror
+            })
         }
         return root
     }

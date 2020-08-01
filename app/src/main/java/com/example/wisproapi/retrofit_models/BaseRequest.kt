@@ -5,11 +5,13 @@ import com.google.gson.annotations.SerializedName
 open class BaseRequest {
     @SerializedName("status")  val status: Integer? = null
     @SerializedName("meta") val meta: Meta? = null
+    @SerializedName("message") val message: String? = null
 }
 
 class Meta {
     @SerializedName("object") val objectt: String? = null
     @SerializedName("pagination") val pagination_info: Pagination? = null
+
 }
 class Pagination {
     @SerializedName("total_records") val total_records: String? = null

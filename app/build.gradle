@@ -115,5 +115,5 @@ dependencies {
     implementation 'androidx.navigation:navigation-ui-ktx:2.2.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
     implementation 'me.relex:circleindicator:2.1.4'
-
+    implementation 'br.com.simplepass:loading-button-android:2.2.0'
 }

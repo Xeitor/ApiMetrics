@@ -45,12 +45,14 @@
 
     </com.google.android.material.textfield.TextInputLayout>
 
-    <Button
-        android:id="@+id/save_button"
-        android:layout_height="wrap_content"
+    <br.com.simplepass.loadingbutton.customViews.CircularProgressButton
+        android:id="@+id/btn_id"
         android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/rounded_btn"
+        app:spinning_bar_width="4dp"
+        app:spinning_bar_color="#FFF"
+        app:spinning_bar_padding="6dp"
         android:text="Guardar"
-        android:layout_margin="10dp"
-        android:background="@color/wispro"
-        android:textColor="@color/white" />
+        android:textColor="@color/white"/>
 </LinearLayout>

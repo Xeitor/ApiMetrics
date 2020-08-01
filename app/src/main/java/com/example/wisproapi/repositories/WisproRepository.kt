@@ -92,4 +92,9 @@ class WisproRepository(context: Context) {
             return total_pages_from_request
         } else return total_pages
     }
+
+    fun checkIspId(isp_id: String):Observable<Payment> {
+        return requestrx.getIspIdTest(1,20, isp_id).subscribeOn(Schedulers.newThread())
+            .observeOn(AndroidSchedulers.mainThread())
+    }
 }
