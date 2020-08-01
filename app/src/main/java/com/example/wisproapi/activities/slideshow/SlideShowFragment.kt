@@ -6,12 +6,14 @@ import android.content.SharedPreferences
 import android.os.Bundle
 import android.os.SystemClock.sleep
 import android.text.TextUtils
+import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.MutableLiveData
 import br.com.simplepass.loadingbutton.customViews.CircularProgressButton
@@ -57,8 +59,14 @@ class SlideShowFragment : Fragment() {
                     editor?.putString("isp_id", strUsername)
                     editor?.apply()
                     btn.revertAnimation()
+                    val text = "Hello toast!"
+                    val duration = Toast.LENGTH_SHORT
+
+                    val toast = Toast.makeText(requireActivity(), text, duration)
+                    toast.setGravity(Gravity.CENTER_VERTICAL, 0, 0)
+                    toast.show()
                 } else{
-                    
+
                     btn.revertAnimation()
                 }
             }, {
