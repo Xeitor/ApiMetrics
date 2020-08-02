@@ -38,11 +38,13 @@ class MyRecyclerViewAdapter internal constructor(
         holder.client_name.text = payment.client_name
         holder.ammount.text = "$" + payment.amount
         holder.transaction_kind.text = payment.transaction_kind
-        holder.payment_date.text = payment.payment_date?.substring(0,10)
-        holder.details.text = payment.payment_date?.substring(0,10)
+        holder.email_collector.text = payment.email_collector
+        holder.public_id.text = "#" + payment.public_id.toString()
+        holder.payment_date.text = dateFormat(payment.payment_date!!)
 
         val isExpanded = position === mExpandedPosition
-        holder.details.setVisibility(if (isExpanded) View.VISIBLE else View.GONE)
+        holder.public_id.setVisibility(if (isExpanded) View.VISIBLE else View.GONE)
+        holder.email_collector.setVisibility(if (isExpanded && !payment.email_collector.isNullOrEmpty()) View.VISIBLE else View.GONE)
         holder.itemView.isActivated = isExpanded
         holder.itemView.setOnClickListener {
             mExpandedPosition = if (isExpanded) -1 else position
@@ -61,8 +63,9 @@ class MyRecyclerViewAdapter internal constructor(
         var client_name: TextView = itemView.findViewById(R.id.client_name)
         var ammount: TextView = itemView.findViewById(R.id.ammount)
         var transaction_kind: TextView = itemView.findViewById(R.id.transaction_kind)
+        var email_collector: TextView = itemView.findViewById(R.id.email_collector)
+        var public_id: TextView = itemView.findViewById(R.id.public_id)
         var payment_date: TextView = itemView.findViewById(R.id.payment_date)
-        var details: TextView = itemView.findViewById(R.id.details)
         override fun onClick(view: View?) {
             if (mClickListener != null) mClickListener!!.onItemClick(view, adapterPosition)
         }
@@ -76,7 +79,10 @@ class MyRecyclerViewAdapter internal constructor(
     fun getItem(id: Int): String {
         return mData.get(id).toString()
     }
-
+    fun dateFormat(date: String): String {
+        var result = date.substring(8,10) + "/" + date.substring(5,7)
+        return result
+    }
     // allows clicks events to be caught
 
     // parent activity will implement this method to respond to click events
