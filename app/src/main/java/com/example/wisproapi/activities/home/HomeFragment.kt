@@ -15,6 +15,8 @@ import com.example.wisproapi.activities.home.viewpager.PagerAdapter
 import com.example.wisproapi.activities.home.viewpager.ReciclerViewFragment
 import com.example.wisproapi.activities.home.viewpager.ViewPagerAlpha
 import com.example.wisproapi.viewmodels.PaymentsViewModel
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.AdView
 import me.relex.circleindicator.CircleIndicator
 
 class HomeFragment : Fragment() {
@@ -23,6 +25,7 @@ class HomeFragment : Fragment() {
     private lateinit var viewPager: ViewPagerAlpha
     val view_model: PaymentsViewModel by viewModels()
     var adapter: MyRecyclerViewAdapter? = null
+    lateinit var mAdView : AdView
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -31,7 +34,9 @@ class HomeFragment : Fragment() {
     ): View? {
 
         val root = inflater.inflate(R.layout.fragment_home, container, false)
-
+        mAdView = root.findViewById(R.id.adView)
+        val adRequest = AdRequest.Builder().build()
+        mAdView.loadAd(adRequest)
         //ViewPager setup
         demoCollectionPagerAdapter =
             PagerAdapter(

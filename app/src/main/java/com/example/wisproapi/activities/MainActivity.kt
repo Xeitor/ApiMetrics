@@ -1,7 +1,6 @@
 package com.example.wisproapi.activities
 
 import android.os.Bundle
-import android.view.Menu
 import android.view.View
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
@@ -12,11 +11,10 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
-import com.example.wisproapi.helpers.CustomDate
 import com.example.wisproapi.R
-import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.example.wisproapi.helpers.CustomDate
+import com.google.android.gms.ads.MobileAds
 import com.google.android.material.navigation.NavigationView
-import com.google.android.material.snackbar.Snackbar
 
 
 class MainActivity : AppCompatActivity() {
@@ -45,6 +43,8 @@ class MainActivity : AppCompatActivity() {
         val header: View = navView.getHeaderView(0)
         val date: TextView = header.findViewById(R.id.fecha_hoy)
         date.text = CustomDate.getCompleteDate()
+
+        MobileAds.initialize(this) {}
 
 //        val isp_id: TextView = header.findViewById(R.id.isp_id_navheader)
 //        isp_id.text = getSharedPreferences("isp_information", Context.MODE_PRIVATE).getString("isp_id", "")
