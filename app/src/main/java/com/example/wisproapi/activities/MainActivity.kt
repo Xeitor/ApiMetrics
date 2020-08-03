@@ -53,7 +53,6 @@ class MainActivity : AppCompatActivity() {
 //        editor.putString("isp_id", "")
 //        editor.apply()
     }
-    
 
     override fun onSupportNavigateUp(): Boolean {
         val navController = findNavController(R.id.nav_host_fragment)
