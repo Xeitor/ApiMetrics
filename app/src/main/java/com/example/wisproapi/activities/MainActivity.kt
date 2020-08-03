@@ -3,6 +3,8 @@ package com.example.wisproapi.activities
 import android.content.Context
 import android.os.Bundle
 import android.view.Menu
+import android.view.View
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.drawerlayout.widget.DrawerLayout
@@ -11,6 +13,7 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
+import com.example.wisproapi.CustomDate
 import com.example.wisproapi.R
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.navigation.NavigationView
@@ -43,6 +46,14 @@ class MainActivity : AppCompatActivity() {
             R.id.nav_home, R.id.nav_gallery, R.id.nav_slideshow), drawerLayout)
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
+
+        //Configure navheader info
+        val header: View = navView.getHeaderView(0)
+        val date: TextView = header.findViewById(R.id.fecha_hoy)
+        date.text = CustomDate.getCompleteDate()
+
+//        val isp_id: TextView = header.findViewById(R.id.isp_id_navheader)
+//        isp_id.text = getSharedPreferences("isp_information", Context.MODE_PRIVATE).getString("isp_id", "")
 
 //        val editor = getSharedPreferences("isp_information", Context.MODE_PRIVATE).edit()
 //        editor.putString("isp_id", "")

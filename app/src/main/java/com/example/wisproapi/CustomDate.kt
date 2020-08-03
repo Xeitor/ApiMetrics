@@ -41,4 +41,13 @@ object CustomDate {
     fun getMonth(): String {
         return months.get(currentMonth)!!
     }
+
+    fun getYear(): String{
+        return currentDateandTime.substring(0,4)
+    }
+
+    fun getCompleteDate():String {
+        var result = currentDay + " de " + months.get(currentMonth) + ", " +  getYear()
+        return result
+    }
 }
