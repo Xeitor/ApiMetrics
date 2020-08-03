@@ -30,7 +30,7 @@ class MonthFragment : Fragment() {
         val textViewCantClientes: TextView = root!!.findViewById(R.id.cant_clientes)
         val fecha: TextView = root!!.findViewById(R.id.fecha)
         fecha.text = "Mensual" + "\n" + CustomDate.getMonth()
-        PaymentsViewModel.livePayment.observe(viewLifecycleOwner, androidx.lifecycle.Observer { new->
+        PaymentsViewModel.livePayment.observe(viewLifecycleOwner, androidx.lifecycle.Observer {
             textViewTotal.text = "$ " + coolFormat(PaymentsViewModel.livePayment.value!!.total.toDouble(), 0) + "\nTotal"
             textViewCantPagos.text = PaymentsViewModel.livePayment.value!!.payments.size.toString() + "\nPagos"
             textViewCantClientes.text = PaymentsViewModel.livePayment.value!!.clientes.size.toString() + "\nClientes"
@@ -45,8 +45,12 @@ class MonthFragment : Fragment() {
         val isRound =
             d * 10 % 10 == 0.0 //true if the decimal part is equal to 0 (then it's trimmed anyway)
         return if (d < 1000) //this determines the class, i.e. 'k', 'm' etc
-            (if (d > 99.9 || isRound || !isRound && d > 9.99) //this decides whether to trim the decimals
-                d.toInt() * 10 / 10 else d.toString() + "" // (int) d * 10 / 10 drops the decimal
+            (if (d > 99.9 || isRound || !isRound && d > 9.99)
+                d.toInt() * 10 / 10
+            else {
+                //this decides whether to trim the decimals
+                d.toString() + "" // (int) d * 10 / 10 drops the decimal
+            }
                     ).toString() + "" + c[iteration] else coolFormat(d, iteration + 1)
     }
 }

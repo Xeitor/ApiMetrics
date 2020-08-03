@@ -39,7 +39,7 @@ class HomeFragment : Fragment() {
             )
         viewPager = root!!.findViewById(R.id.view_pager)
         viewPager.adapter = demoCollectionPagerAdapter
-        val indicator = root!!.findViewById(R.id.indicator) as CircleIndicator
+        val indicator = root.findViewById(R.id.indicator) as CircleIndicator
         indicator.setViewPager(viewPager)
 
         //ReciclerView fragment setup

@@ -31,8 +31,8 @@ class PaymentHandler() {
             if (payment.payment_date!!.contains(currentDateandTime)) {
                 dayly_clients.add(payment.client_name.toString())
                 dayly_payments++
-                var temp: String = payment.amount + "F"
-                dayly_total += temp.toFloat()
+                var tempp: String = payment.amount + "F"
+                dayly_total += tempp.toFloat()
             }
         }
         total += aux

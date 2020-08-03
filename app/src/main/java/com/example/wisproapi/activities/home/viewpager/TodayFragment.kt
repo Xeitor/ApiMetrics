@@ -22,12 +22,12 @@ class TodayFragment : Fragment() {
 
         val root = inflater.inflate(R.layout.scene_a, container, false)
         val textViewTotal: TextView = root!!.findViewById(R.id.total)
-        val textViewCantPagos: TextView = root!!.findViewById(R.id.cant_pagos)
-        val textViewCantClientes: TextView = root!!.findViewById(R.id.cant_clientes)
-        val fecha: TextView = root!!.findViewById(R.id.fecha)
+        val textViewCantPagos: TextView = root.findViewById(R.id.cant_pagos)
+        val textViewCantClientes: TextView = root.findViewById(R.id.cant_clientes)
+        val fecha: TextView = root.findViewById(R.id.fecha)
         fecha.text = "Hoy" + "\n" + CustomDate.currentDay + "/" + CustomDate.currentMonth
 
-        PaymentsViewModel.livePayment.observe(viewLifecycleOwner, androidx.lifecycle.Observer { new->
+        PaymentsViewModel.livePayment.observe(viewLifecycleOwner, androidx.lifecycle.Observer {
             textViewTotal.text = "$ " + coolFormat(PaymentsViewModel.livePayment.value!!.dayly_total.toDouble(), 0) + "\nTotal"
             textViewCantPagos.text = PaymentsViewModel.livePayment.value!!.dayly_payments.toString() + "\nPagos"
             textViewCantClientes.text = PaymentsViewModel.livePayment.value!!.dayly_clients.size.toString() + "\nClientes"

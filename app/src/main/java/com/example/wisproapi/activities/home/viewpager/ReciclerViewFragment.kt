@@ -26,7 +26,6 @@ class ReciclerViewFragment : Fragment() {
         val root = inflater.inflate(R.layout.fragment_recicler_view, container, false)
 
         val swipe_refresh_layout: SwipeRefreshLayout = root!!.findViewById(R.id.swiperefresh)
-        val top_to_padding = 100
 
         swipe_refresh_layout.setOnRefreshListener(OnRefreshListener {
             Thread(Runnable {
@@ -41,11 +40,10 @@ class ReciclerViewFragment : Fragment() {
         })
 
 
-        PaymentsViewModel.livePayment.observe(viewLifecycleOwner, androidx.lifecycle.Observer { new->
+        PaymentsViewModel.livePayment.observe(viewLifecycleOwner, androidx.lifecycle.Observer {
             //SetupReciclerView
-            val recyclerView: RecyclerView = root!!.findViewById(R.id.reciclerview_widget)
-            recyclerView.layoutManager =
-                LinearLayoutManager(this.context)
+            val recyclerView: RecyclerView = root.findViewById(R.id.reciclerview_widget)
+            recyclerView.layoutManager = LinearLayoutManager(this.context)
 //            val list_Test = Collections.reverse(aymentsViewModel.livePayment.value!!.payments)
             adapter = MyRecyclerViewAdapter(
                 this.context,
