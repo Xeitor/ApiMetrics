@@ -25,6 +25,10 @@
     <item name="windowNoTitle">true</item>
     <item name="tabStyle">@style/WhiteFont</item>
 </style>
+    <style name="Launcher.Theme" parent="@style/Theme.AppCompat.Light">
+        <!-- Customize your theme here. -->
+        <item name="android:windowBackground">@drawable/splashscreen</item>
+    </style>
 <style name="Toolbar" parent="@style/Theme.AppCompat.Light">
     <item name="windowNoTitle">true</item>
     <item name="windowActionBar">false</item>
