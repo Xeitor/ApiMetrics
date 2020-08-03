@@ -6,12 +6,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import com.example.wisproapi.CustomDate
+import com.example.wisproapi.helpers.CustomDate
 import com.example.wisproapi.R
-import com.example.wisproapi.activities.MyRecyclerViewAdapter
+import com.example.wisproapi.helpers.MyRecyclerViewAdapter
 import com.example.wisproapi.viewmodels.PaymentsViewModel
 
 class TodayFragment : Fragment() {
@@ -28,7 +25,7 @@ class TodayFragment : Fragment() {
         val textViewCantPagos: TextView = root!!.findViewById(R.id.cant_pagos)
         val textViewCantClientes: TextView = root!!.findViewById(R.id.cant_clientes)
         val fecha: TextView = root!!.findViewById(R.id.fecha)
-        fecha.text = "Hoy" + "\n" + CustomDate.currentDay + "/" +CustomDate.currentMonth
+        fecha.text = "Hoy" + "\n" + CustomDate.currentDay + "/" + CustomDate.currentMonth
 
         PaymentsViewModel.livePayment.observe(viewLifecycleOwner, androidx.lifecycle.Observer { new->
             textViewTotal.text = "$ " + coolFormat(PaymentsViewModel.livePayment.value!!.dayly_total.toDouble(), 0) + "\nTotal"

@@ -10,7 +10,7 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.example.wisproapi.R
-import com.example.wisproapi.activities.MyRecyclerViewAdapter
+import com.example.wisproapi.helpers.MyRecyclerViewAdapter
 import com.example.wisproapi.activities.home.viewpager.PagerAdapter
 import com.example.wisproapi.activities.home.viewpager.ReciclerViewFragment
 import com.example.wisproapi.activities.home.viewpager.ViewPagerAlpha

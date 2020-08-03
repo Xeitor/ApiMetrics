@@ -1,4 +1,4 @@
-package com.example.wisproapi.activities
+package com.example.wisproapi.helpers
 
 import android.content.Context
 import android.view.LayoutInflater

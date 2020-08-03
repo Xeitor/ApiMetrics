@@ -6,13 +6,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.MutableLiveData
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import com.example.wisproapi.CustomDate
+import com.example.wisproapi.helpers.CustomDate
 import com.example.wisproapi.R
-import com.example.wisproapi.activities.MyRecyclerViewAdapter
+import com.example.wisproapi.helpers.MyRecyclerViewAdapter
 import com.example.wisproapi.retrofit_models.PaymentHandler
 import com.example.wisproapi.viewmodels.PaymentsViewModel
 

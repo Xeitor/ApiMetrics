@@ -1,4 +1,4 @@
-package com.example.wisproapi
+package com.example.wisproapi.helpers
 
 import java.text.SimpleDateFormat
 import java.util.*
@@ -39,7 +39,9 @@ object CustomDate {
     }
 
     fun getMonth(): String {
-        return months.get(currentMonth)!!
+        return months.get(
+            currentMonth
+        )!!
     }
 
     fun getYear(): String{
@@ -47,7 +49,9 @@ object CustomDate {
     }
 
     fun getCompleteDate():String {
-        var result = currentDay + " de " + months.get(currentMonth) + ", " +  getYear()
+        var result = currentDay + " de " + months.get(
+            currentMonth
+        ) + ", " + getYear()
         return result
     }
 }
