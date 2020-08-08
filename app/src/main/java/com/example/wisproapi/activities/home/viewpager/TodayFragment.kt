@@ -31,7 +31,6 @@ class TodayFragment : Fragment() {
             textViewTotal.text = "$ " + coolFormat(PaymentsViewModel.livePayment.value!!.dayly_total.toDouble(), 0) + "\nTotal"
             textViewCantPagos.text = PaymentsViewModel.livePayment.value!!.dayly_payments.toString() + "\nPagos"
             textViewCantClientes.text = PaymentsViewModel.livePayment.value!!.dayly_clients.size.toString() + "\nClientes"
-
         })
         return root
     }

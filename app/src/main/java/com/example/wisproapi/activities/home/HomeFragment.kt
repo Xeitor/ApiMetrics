@@ -2,11 +2,11 @@ package com.example.wisproapi.activities.home
 
 import android.content.Context
 import android.content.SharedPreferences
-import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.View.INVISIBLE
+import android.view.View.VISIBLE
 import android.view.ViewGroup
 import android.widget.ProgressBar
 import android.widget.TextView
@@ -29,6 +29,7 @@ class HomeFragment : Fragment() {
     val view_model: PaymentsViewModel by viewModels()
     var adapter: MyRecyclerViewAdapter? = null
     lateinit var mAdView : AdView
+    var progressBar: ProgressBar? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -37,9 +38,12 @@ class HomeFragment : Fragment() {
     ): View? {
 
         val root = inflater.inflate(R.layout.fragment_home, container, false)
+
+        //AdView Request
         mAdView = root.findViewById(R.id.adView)
         val adRequest = AdRequest.Builder().build()
         mAdView.loadAd(adRequest)
+
         //ViewPager setup
         demoCollectionPagerAdapter =
             PagerAdapter(
@@ -57,32 +61,31 @@ class HomeFragment : Fragment() {
         fragmentTransaction?.add(R.id.relative_layouttest, fragment)
         fragmentTransaction?.commit()
 
-        //Initialize viewmodel
-        Thread(Runnable {
-            try {
-                view_model.get_live_payment()
-            } catch (ex: Exception) {
-                ex.printStackTrace()
-            }
-        }).start()
+        //LoadPayments
+        loadPayments()
 
         //Missing token information
-        var missing_token_text_view: TextView = root.findViewById(R.id.text_gallery)
+        var missingTokenTextView: TextView = root.findViewById(R.id.text_gallery)
         var prefs: SharedPreferences = requireActivity().getSharedPreferences("isp_information", Context.MODE_PRIVATE)
         var isp_id = prefs.getString("isp_id", null) //"No name defined" is the default value.
-        if (isp_id.isNullOrEmpty()) missing_token_text_view.text = "Ups! Al parecer aún no configuras un token id.\nDirígite a la ventana de ajustes para hacerlo"
-        var progressBar: ProgressBar = root.findViewById(R.id.progressBar)
+        if (isp_id.isNullOrEmpty()) missingTokenTextView.text = "Ups! Al parecer aún no configuras un token id.\nDirígite a la ventana de ajustes para hacerlo"
+        progressBar = root.findViewById(R.id.progressBar)
 
         PaymentsViewModel.livePayment.observe(viewLifecycleOwner, androidx.lifecycle.Observer {
-            progressBar.visibility = INVISIBLE
+            progressBar!!.visibility = INVISIBLE
         })
         return root
     }
 
     override fun onResume() {
         super.onResume()
+        loadPayments()
+    }
+
+    fun loadPayments(){
         Thread(Runnable {
             try {
+                progressBar!!.visibility = VISIBLE
                 view_model.get_live_payment()
             } catch (ex: Exception) {
                 ex.printStackTrace()
