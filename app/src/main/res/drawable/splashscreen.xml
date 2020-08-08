@@ -4,7 +4,7 @@
     <item>
         <bitmap
             android:gravity="center"
-            android:src="@drawable/wisproapi_splashscreen_round"
+            android:src="@drawable/wisproapi_splashscreen"
             />
     </item>
 </layer-list>

@@ -6,6 +6,7 @@ import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
+import android.view.View.INVISIBLE
 import android.view.ViewGroup
 import android.widget.ProgressBar
 import android.widget.TextView
@@ -70,10 +71,11 @@ class HomeFragment : Fragment() {
         var prefs: SharedPreferences = requireActivity().getSharedPreferences("isp_information", Context.MODE_PRIVATE)
         var isp_id = prefs.getString("isp_id", null) //"No name defined" is the default value.
         if (isp_id.isNullOrEmpty()) missing_token_text_view.text = "Ups! Al parecer aún no configuras un token id.\nDirígite a la ventana de ajustes para hacerlo"
+        var progressBar: ProgressBar = root.findViewById(R.id.progressBar)
 
-//        var progressBar: ProgressBar = root.findViewById(R.id.progressBar)
-//        progressBar.progressDrawable.setColorFilter(Color.RED, android.graphics.PorterDuff.Mode.SRC_IN);
-//        progressBar.visibility = View.VISIBLE
+        PaymentsViewModel.livePayment.observe(viewLifecycleOwner, androidx.lifecycle.Observer {
+            progressBar.visibility = INVISIBLE
+        })
         return root
     }
 

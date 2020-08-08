@@ -21,6 +21,7 @@
     </com.example.wisproapi.activities.home.viewpager.ViewPagerAlpha>
     <me.zhanghai.android.materialprogressbar.MaterialProgressBar
         android:layout_width="match_parent"
+        android:id="@+id/progressBar"
         android:layout_height="4dp"
         app:mpb_useIntrinsicPadding="false"
         android:indeterminate="true"
