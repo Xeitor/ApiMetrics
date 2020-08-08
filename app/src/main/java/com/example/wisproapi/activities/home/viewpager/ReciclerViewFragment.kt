@@ -30,9 +30,9 @@ class ReciclerViewFragment : Fragment() {
         swipe_refresh_layout.setOnRefreshListener(OnRefreshListener {
             Thread(Runnable {
                 try {
+                    swipe_refresh_layout.isRefreshing = false
                     val view_model: PaymentsViewModel by viewModels()
                     view_model.get_live_payment()
-                    swipe_refresh_layout.isRefreshing = false;
                 } catch (ex: Exception) {
                     ex.printStackTrace()
                 }

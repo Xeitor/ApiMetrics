@@ -85,21 +85,16 @@
             android:text="...\nClientes"
             android:textColor="@color/white"
             android:textSize="14sp" />
-
     </LinearLayout>
 
-    <ProgressBar
-        android:id="@+id/progressBar"
-        style="@style/Widget.AppCompat.ProgressBar.Horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:indeterminate="true"
-        android:indeterminateTint="@color/Red"
-        android:indeterminateTintMode="src_atop"
-        android:visibility="visible"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/subheader">
-    </ProgressBar>
-
+<!--    <ProgressBar-->
+<!--        android:id="@+id/progressBar"-->
+<!--        style="@style/Widget.AppCompat.ProgressBar.Horizontal"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:indeterminate="true"-->
+<!--        android:indeterminateTint="@color/Red"-->
+<!--        android:indeterminateTintMode="src_atop"-->
+<!--        android:visibility="visible"-->
+<!--    </ProgressBar>-->
 </androidx.constraintlayout.widget.ConstraintLayout>
