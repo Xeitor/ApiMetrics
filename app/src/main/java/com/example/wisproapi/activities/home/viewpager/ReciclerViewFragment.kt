@@ -16,6 +16,7 @@ import com.example.wisproapi.viewmodels.PaymentsViewModel
 class ReciclerViewFragment : Fragment() {
 
     var adapter: MyRecyclerViewAdapter? = null
+    val swipe_refresh_layout: SwipeRefreshLayout? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -28,18 +29,9 @@ class ReciclerViewFragment : Fragment() {
         val swipe_refresh_layout: SwipeRefreshLayout = root!!.findViewById(R.id.swiperefresh)
 
         swipe_refresh_layout.setOnRefreshListener(OnRefreshListener {
-            Thread(Runnable {
-                try {
-                    swipe_refresh_layout.isRefreshing = false
-                    val view_model: PaymentsViewModel by viewModels()
-                    view_model.get_live_payment()
-                } catch (ex: Exception) {
-                    ex.printStackTrace()
-                }
-            }).start()
+            loadPayments()
         })
-
-
+        
         PaymentsViewModel.livePayment.observe(viewLifecycleOwner, androidx.lifecycle.Observer {
             //SetupReciclerView
             val recyclerView: RecyclerView = root.findViewById(R.id.reciclerview_widget)
@@ -50,7 +42,19 @@ class ReciclerViewFragment : Fragment() {
                 PaymentsViewModel.livePayment.value!!.payments.reversed()
             )
             recyclerView.adapter = adapter
+            swipe_refresh_layout!!.isRefreshing = false
         })
         return root
+    }
+
+    fun loadPayments(){
+        Thread(Runnable {
+            try {
+                val view_model: PaymentsViewModel by viewModels()
+                view_model.get_live_payment()
+            } catch (ex: Exception) {
+                ex.printStackTrace()
+            }
+        }).start()
     }
 }

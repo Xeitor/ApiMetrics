@@ -54,11 +54,11 @@ class HomeFragment : Fragment() {
         val indicator = root.findViewById(R.id.indicator) as CircleIndicator
         indicator.setViewPager(viewPager)
 
-        //ReciclerView fragment setup
+        // ReciclerView fragment setup
         val fragmentManager = activity?.supportFragmentManager
         val fragmentTransaction = fragmentManager?.beginTransaction()
         val fragment = ReciclerViewFragment()
-        fragmentTransaction?.add(R.id.relative_layouttest, fragment)
+        fragmentTransaction?.add(R.id.relative_layout, fragment)
         fragmentTransaction?.commit()
 
         //LoadPayments
