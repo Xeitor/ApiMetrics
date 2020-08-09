@@ -16,12 +16,7 @@ import com.example.wisproapi.R
 import com.example.wisproapi.activities.home.viewpager.PagerAdapter
 import com.example.wisproapi.activities.home.viewpager.ReciclerViewFragment
 import com.example.wisproapi.activities.home.viewpager.ViewPagerAlpha
-import com.example.wisproapi.helpers.MyRecyclerViewAdapter
 import com.example.wisproapi.viewmodels.PaymentsViewModel
-import com.google.android.gms.ads.AdListener
-import com.google.android.gms.ads.AdRequest
-import com.google.android.gms.ads.AdView
-import com.google.android.gms.ads.InterstitialAd
 import me.relex.circleindicator.CircleIndicator
 
 
@@ -30,10 +25,7 @@ class HomeFragment : Fragment() {
     private lateinit var demoCollectionPagerAdapter: PagerAdapter
     private lateinit var viewPager: ViewPagerAlpha
     val view_model: PaymentsViewModel by viewModels()
-    var adapter: MyRecyclerViewAdapter? = null
-    lateinit var mAdView : AdView
     var progressBar: ProgressBar? = null
-    private lateinit var mInterstitialAd: InterstitialAd
     private lateinit var root: View
 
     override fun onCreateView(
@@ -47,7 +39,7 @@ class HomeFragment : Fragment() {
         viewPagerSetUp()
 
         // ReciclerView fragment setup
-        reciclerViewConfig()
+        recyclerViewConfig()
 
         //LoadPayments
         loadPayments()
@@ -57,7 +49,6 @@ class HomeFragment : Fragment() {
 
         //Linear ProgressBar config
         progressBarConfig()
-
         return root
     }
 
@@ -66,7 +57,7 @@ class HomeFragment : Fragment() {
         loadPayments()
     }
 
-    fun loadPayments(){
+    private fun loadPayments(){
         Thread(Runnable {
             try {
                 progressBar!!.visibility = VISIBLE
@@ -76,25 +67,20 @@ class HomeFragment : Fragment() {
             }
         }).start()
     }
-    fun displayInterstitial() {
-        if (mInterstitialAd.isLoaded) {
-            mInterstitialAd.show()
-        }
-    }
-    fun checkForMissingToken() {
-        var missingTokenTextView: TextView = root.findViewById(R.id.text_gallery)
-        var prefs: SharedPreferences = requireActivity().getSharedPreferences("isp_information", Context.MODE_PRIVATE)
-        var isp_id = prefs.getString("isp_id", null) //"No name defined" is the default value.
+    private fun checkForMissingToken() {
+        val missingTokenTextView: TextView = root.findViewById(R.id.text_gallery)
+        val prefs: SharedPreferences = requireActivity().getSharedPreferences("isp_information", Context.MODE_PRIVATE)
+        val isp_id = prefs.getString("isp_id", null) //"No name defined" is the default value.
         if (isp_id.isNullOrEmpty()) missingTokenTextView.text = "Ups! Al parecer aún no configuras un token id.\nDirígite a la ventana de ajustes para hacerlo"
     }
-    fun reciclerViewConfig(){
+    private fun recyclerViewConfig(){
         val fragmentManager = activity?.supportFragmentManager
         val fragmentTransaction = fragmentManager?.beginTransaction()
         val fragment = ReciclerViewFragment()
         fragmentTransaction?.add(R.id.relative_layout, fragment)
         fragmentTransaction?.commit()
     }
-    fun viewPagerSetUp(){
+    private fun viewPagerSetUp(){
         demoCollectionPagerAdapter = PagerAdapter(childFragmentManager)
         viewPager = root!!.findViewById(R.id.view_pager)
         viewPager.adapter = demoCollectionPagerAdapter
@@ -102,7 +88,7 @@ class HomeFragment : Fragment() {
         indicator.setViewPager(viewPager)
     }
 
-    fun progressBarConfig(){
+    private fun progressBarConfig(){
         progressBar = root.findViewById(R.id.progressBar)
         PaymentsViewModel.livePayment.observe(viewLifecycleOwner, androidx.lifecycle.Observer {
             progressBar!!.visibility = INVISIBLE

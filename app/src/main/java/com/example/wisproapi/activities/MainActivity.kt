@@ -13,9 +13,7 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.wisproapi.R
 import com.example.wisproapi.helpers.CustomDate
-import com.google.android.gms.ads.AdRequest
-import com.google.android.gms.ads.AdView
-import com.google.android.gms.ads.MobileAds
+import com.google.android.gms.ads.*
 import com.google.android.material.navigation.NavigationView
 
 
@@ -23,7 +21,7 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var appBarConfiguration: AppBarConfiguration
     lateinit var mAdView : AdView
-
+    private lateinit var mInterstitialAd: InterstitialAd
 
     override fun onCreate(savedInstanceState: Bundle?) {
         setTheme(R.style.AppThemeV2)
@@ -48,10 +46,21 @@ class MainActivity : AppCompatActivity() {
         val date: TextView = header.findViewById(R.id.fecha_hoy)
         date.text = CustomDate.getCompleteDate()
 
+        //AdView Request
         MobileAds.initialize(this) {}
+
         mAdView = findViewById(R.id.adView)
         val adRequest = AdRequest.Builder().build()
         mAdView.loadAd(adRequest)
+
+        mInterstitialAd = InterstitialAd(this)
+        mInterstitialAd.adUnitId = "ca-app-pub-3940256099942544/1033173712"
+        mInterstitialAd.loadAd(adRequest)
+        mInterstitialAd.adListener = object : AdListener() {
+            override fun onAdLoaded() {
+                displayInterstitial()
+            }
+        }
 //        val isp_id: TextView = header.findViewById(R.id.isp_id_navheader)
 //        isp_id.text = getSharedPreferences("isp_information", Context.MODE_PRIVATE).getString("isp_id", "")
 
@@ -62,6 +71,12 @@ class MainActivity : AppCompatActivity() {
 
     override fun onSupportNavigateUp(): Boolean {
         val navController = findNavController(R.id.nav_host_fragment)
+        mInterstitialAd.loadAd(AdRequest.Builder().build())
         return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
+    }
+    fun displayInterstitial() {
+        if (mInterstitialAd.isLoaded) {
+            mInterstitialAd.show()
+        }
     }
 }
