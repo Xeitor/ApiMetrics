@@ -13,6 +13,8 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.wisproapi.R
 import com.example.wisproapi.helpers.CustomDate
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.AdView
 import com.google.android.gms.ads.MobileAds
 import com.google.android.material.navigation.NavigationView
 
@@ -20,6 +22,8 @@ import com.google.android.material.navigation.NavigationView
 class MainActivity : AppCompatActivity() {
 
     private lateinit var appBarConfiguration: AppBarConfiguration
+    lateinit var mAdView : AdView
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         setTheme(R.style.AppThemeV2)
@@ -45,7 +49,9 @@ class MainActivity : AppCompatActivity() {
         date.text = CustomDate.getCompleteDate()
 
         MobileAds.initialize(this) {}
-
+        mAdView = findViewById(R.id.adView)
+        val adRequest = AdRequest.Builder().build()
+        mAdView.loadAd(adRequest)
 //        val isp_id: TextView = header.findViewById(R.id.isp_id_navheader)
 //        isp_id.text = getSharedPreferences("isp_information", Context.MODE_PRIVATE).getString("isp_id", "")
 

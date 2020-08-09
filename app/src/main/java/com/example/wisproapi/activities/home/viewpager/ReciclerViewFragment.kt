@@ -36,7 +36,6 @@ class ReciclerViewFragment : Fragment() {
             //SetupReciclerView
             val recyclerView: RecyclerView = root.findViewById(R.id.reciclerview_widget)
             recyclerView.layoutManager = LinearLayoutManager(this.context)
-//            val list_Test = Collections.reverse(aymentsViewModel.livePayment.value!!.payments)
             adapter = MyRecyclerViewAdapter(
                 this.context,
                 PaymentsViewModel.livePayment.value!!.payments.reversed()
