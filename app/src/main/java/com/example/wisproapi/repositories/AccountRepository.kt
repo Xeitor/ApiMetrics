@@ -16,11 +16,11 @@ import retrofit2.Response
 
 class AccountRepository() {
 
-    val request = ServiceBuilder.buildService(ApiClientRequest::class.java)
+    val request = ServiceBuilder.buildServiceApiClient(ApiClientRequest::class.java)
 
     fun authenticateUser(): MutableLiveData<ClientAccount> {
         var data = MutableLiveData<ClientAccount>()
-        val call: Call<ClientAccount> = request.authenticate("testing@gmail.com", "123456")
+        val call: Call<ClientAccount> = request.authenticate("testing@gmail.com", "1234566")
         call.clone().enqueue(object : Callback<ClientAccount> {
             override fun onResponse(call: Call<ClientAccount>, response: Response<ClientAccount>) {
                 data.value = response.body()
