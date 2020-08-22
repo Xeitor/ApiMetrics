@@ -46,9 +46,8 @@ class MainActivity : AppCompatActivity() {
         val date: TextView = header.findViewById(R.id.fecha_hoy)
         date.text = CustomDate.getCompleteDate()
 
-        //AdView Request
+        //AdView requests
         MobileAds.initialize(this) {}
-
         mAdView = findViewById(R.id.adView)
         val adRequest = AdRequest.Builder().build()
         mAdView.loadAd(adRequest)
@@ -74,6 +73,7 @@ class MainActivity : AppCompatActivity() {
         mInterstitialAd.loadAd(AdRequest.Builder().build())
         return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
     }
+
     fun displayInterstitial() {
         if (mInterstitialAd.isLoaded) {
             mInterstitialAd.show()
