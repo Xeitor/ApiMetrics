@@ -4,7 +4,7 @@
     android:id="@+id/mobile_navigation"
     app:startDestination="@+id/nav_home">
     <fragment
-        android:id="@+id/login"
+        android:id="@+id/nav_login"
         android:name="com.example.wisproapi.activities.login.LoginFragment">
         <action
             android:id="@+id/from_login_to_payments"
