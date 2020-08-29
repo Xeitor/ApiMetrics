@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--Tiene toolbar y content main layout(fragmento)-->
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -18,31 +19,9 @@
             android:layout_height="60dp"
             android:background="@color/wispro"
             app:popupTheme="@style/AppTheme.PopupOverlay" >
-
-<!--            <RelativeLayout-->
-<!--                android:orientation="vertical"-->
-<!--                android:background="@color/wispro"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_below="@+id/toolbar"-->
-<!--                android:id="@+id/card_view"-->
-<!--                android:layout_width="match_parent">-->
-
-<!--                <TextView-->
-<!--                    android:id="@+id/statuscode"-->
-<!--                    android:layout_width="wrap_content"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:fontFamily="@font/roboto"-->
-<!--                    android:padding="10dp"-->
-<!--                    android:textSize="20sp"-->
-<!--                    android:textStyle="bold"-->
-<!--                    android:text="Test"/>-->
-
-
-<!--            </RelativeLayout>-->
         </androidx.appcompat.widget.Toolbar>
 
     </com.google.android.material.appbar.AppBarLayout>
 
     <include layout="@layout/content_main" />
-
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
