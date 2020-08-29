@@ -86,15 +86,4 @@
             android:textColor="@color/white"
             android:textSize="14sp" />
     </LinearLayout>
-
-<!--    <ProgressBar-->
-<!--        android:id="@+id/progressBar"-->
-<!--        style="@style/Widget.AppCompat.ProgressBar.Horizontal"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:indeterminate="true"-->
-<!--        android:indeterminateTint="@color/Red"-->
-<!--        android:indeterminateTintMode="src_atop"-->
-<!--        android:visibility="visible"-->
-<!--    </ProgressBar>-->
 </androidx.constraintlayout.widget.ConstraintLayout>

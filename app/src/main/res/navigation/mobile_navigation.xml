@@ -5,9 +5,9 @@
     app:startDestination="@+id/nav_home">
     <fragment
         android:id="@+id/login"
-        android:name="com.example.wisproapi.activities.gallery.GalleryFragment">
+        android:name="com.example.wisproapi.activities.login.LoginFragment">
         <action
-            android:id="@+id/action_profile_dest_to_login_dest"
+            android:id="@+id/from_login_to_payments"
             app:destination="@id/nav_home"
             app:popUpTo="@+id/nav_gallery"
             app:popUpToInclusive="true" />
