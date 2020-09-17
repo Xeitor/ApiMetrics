@@ -26,7 +26,7 @@ class GalleryFragment : Fragment() {
 
         var repository = AccountRepository(requireContext())
         repository.authenticateUser().observe(viewLifecycleOwner, androidx.lifecycle.Observer {
-            textView.text = it.data?.uid + it.data?.allow_password_change.toString() + prefs.getString("access_token", "defvalue")
+            textView.text = it.data?.email + it.data?.allow_password_change.toString() + prefs.getString("access_token", "defvalue")
         })
 
         return root

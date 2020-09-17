@@ -93,7 +93,5 @@ class HomeFragment : Fragment() {
         PaymentsViewModel.livePayment.observe(viewLifecycleOwner, androidx.lifecycle.Observer {
             progressBar!!.visibility = INVISIBLE
         })
-
     }
-
 }

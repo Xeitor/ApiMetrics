@@ -1,5 +1,6 @@
 package com.example.wisproapi.activities
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.TextView
@@ -24,6 +25,17 @@ class MainActivity : AppCompatActivity() {
     private lateinit var mInterstitialAd: InterstitialAd
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        val myIntent = Intent(this@MainActivity, LoginActivity::class.java)
+        myIntent.flags = Intent.FLAG_ACTIVITY_NO_HISTORY
+
+
+        var logged_in: Boolean = true
+
+        if (logged_in) {
+            startActivity(myIntent)
+            killActivity()
+        }
+
         setTheme(R.style.AppThemeV2)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main_final)
@@ -34,6 +46,7 @@ class MainActivity : AppCompatActivity() {
         val drawerLayout: DrawerLayout = findViewById(R.id.drawer_layout)
         val navView: NavigationView = findViewById(R.id.nav_view)
         val navController = findNavController(R.id.nav_host_fragment)
+
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         appBarConfiguration = AppBarConfiguration(setOf(R.id.nav_home, R.id.nav_gallery, R.id.nav_slideshow, R.id.nav_login), drawerLayout)
@@ -45,6 +58,14 @@ class MainActivity : AppCompatActivity() {
         val date: TextView = header.findViewById(R.id.fecha_hoy)
         date.text = CustomDate.getCompleteDate()
 
+//        val isp_id: TextView = header.findViewById(R.id.isp_id_navheader)
+//        isp_id.text = getSharedPreferences("isp_information", Context.MODE_PRIVATE).getString("isp_id", "")
+
+//        val editor = getSharedPreferences("isp_information", Context.MODE_PRIVATE).edit()
+//        editor.putString("isp_id", "")
+//        editor.apply()
+    }
+    fun setupAdd(){
         //AdView requests
         MobileAds.initialize(this) {}
         mAdView = findViewById(R.id.adView)
@@ -59,14 +80,7 @@ class MainActivity : AppCompatActivity() {
                 displayInterstitial()
             }
         }
-//        val isp_id: TextView = header.findViewById(R.id.isp_id_navheader)
-//        isp_id.text = getSharedPreferences("isp_information", Context.MODE_PRIVATE).getString("isp_id", "")
-
-//        val editor = getSharedPreferences("isp_information", Context.MODE_PRIVATE).edit()
-//        editor.putString("isp_id", "")
-//        editor.apply()
     }
-
     override fun onSupportNavigateUp(): Boolean {
         val navController = findNavController(R.id.nav_host_fragment)
         mInterstitialAd.loadAd(AdRequest.Builder().build())
@@ -77,5 +91,8 @@ class MainActivity : AppCompatActivity() {
         if (mInterstitialAd.isLoaded) {
             mInterstitialAd.show()
         }
+    }
+    private fun killActivity() {
+        finish()
     }
 }

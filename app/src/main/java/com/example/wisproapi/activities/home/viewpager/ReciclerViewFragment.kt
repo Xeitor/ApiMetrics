@@ -34,6 +34,7 @@ class ReciclerViewFragment : Fragment() {
         
         PaymentsViewModel.livePayment.observe(viewLifecycleOwner, androidx.lifecycle.Observer {
             //SetupReciclerView
+            swipe_refresh_layout!!.isRefreshing = false
             val recyclerView: RecyclerView = root.findViewById(R.id.reciclerview_widget)
             recyclerView.layoutManager = LinearLayoutManager(this.context)
             adapter = MyRecyclerViewAdapter(
@@ -41,7 +42,6 @@ class ReciclerViewFragment : Fragment() {
                 PaymentsViewModel.livePayment.value!!.payments.reversed()
             )
             recyclerView.adapter = adapter
-            swipe_refresh_layout!!.isRefreshing = false
         })
         return root
     }
