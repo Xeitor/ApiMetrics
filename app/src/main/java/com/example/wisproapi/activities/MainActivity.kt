@@ -1,6 +1,8 @@
 package com.example.wisproapi.activities
 
+import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.MutableBoolean
 import android.view.View
@@ -15,6 +17,10 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.wisproapi.R
 import com.example.wisproapi.helpers.CustomDate
+import com.example.wisproapi.repositories.AccountRepository
+import com.example.wisproapi.repositories.LocalRepository
+import com.example.wisproapi.retrofit_models.ClientLogin
+import com.example.wisproapi.retrofit_models.ResponseStatus
 import com.google.android.gms.ads.*
 import com.google.android.material.navigation.NavigationView
 
@@ -26,16 +32,8 @@ class MainActivity : AppCompatActivity() {
     private lateinit var mInterstitialAd: InterstitialAd
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        val myIntent = Intent(this@MainActivity, LoginActivity::class.java)
-        myIntent.flags = Intent.FLAG_ACTIVITY_NO_HISTORY
 
-
-        var logged_in: Boolean = true
-
-//        if (logged_in) {
-//            startActivity(myIntent)
-//            killActivity()
-//        }
+        authenticateUser()
 
         setTheme(R.style.AppThemeV2)
         super.onCreate(savedInstanceState)
@@ -96,5 +94,33 @@ class MainActivity : AppCompatActivity() {
     }
     private fun killActivity() {
         finish()
+    }
+
+    fun authenticateUser(){
+
+        val localRepo: LocalRepository = LocalRepository(this)
+        if (localRepo.isActive()) { // Si hay preferencias guardadas validar token
+            // validar token
+
+        } else { // Si no hay preferencias guardadas largar intent
+            launchLoginIntent()
+        }
+
+        var accountRepository = AccountRepository(this)
+        accountRepository.authenticateUser().observe(this, androidx.lifecycle.Observer {
+            if (!it.status!!) {
+                val myIntent = Intent(this@MainActivity, LoginActivity::class.java)
+                myIntent.flags = Intent.FLAG_ACTIVITY_NO_HISTORY
+                startActivity(myIntent)
+                killActivity()
+            }
+        })
+    }
+
+    fun launchLoginIntent() {
+        val myIntent = Intent(this@MainActivity, LoginActivity::class.java)
+        myIntent.flags = Intent.FLAG_ACTIVITY_NO_HISTORY
+        startActivity(myIntent)
+        killActivity()
     }
 }

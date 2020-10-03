@@ -28,7 +28,7 @@ class AccountRepository(context: Context) {
         var data = MutableLiveData<ClientAccount>()
         var responseStatusLive = MutableLiveData<ResponseStatus>()
         var responseStatusHelper = ResponseStatus()
-        val call: Call<ClientAccount> = request.authenticate("testing@gmail.com", "123456")
+        val call: Call<ClientAccount> = request.authenticate("testing@gmail.com", "1234561")
 
         call.clone().enqueue(object : Callback<ClientAccount> {
             override fun onResponse(call: Call<ClientAccount>, response: Response<ClientAccount>) {
