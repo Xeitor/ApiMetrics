@@ -25,8 +25,9 @@ class GalleryFragment : Fragment() {
         var prefs: SharedPreferences = requireActivity().getSharedPreferences("client_information", Context.MODE_PRIVATE)
 
         var repository = AccountRepository(requireContext())
+
         repository.authenticateUser().observe(viewLifecycleOwner, androidx.lifecycle.Observer {
-            textView.text = it.data?.email + it.data?.allow_password_change.toString() + prefs.getString("access_token", "defvalue")
+            textView.text = it.status.toString() + prefs.getString("email", "defvalue")
         })
 
         return root

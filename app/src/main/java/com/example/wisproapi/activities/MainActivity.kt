@@ -2,6 +2,7 @@ package com.example.wisproapi.activities
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.MutableBoolean
 import android.view.View
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
@@ -31,10 +32,10 @@ class MainActivity : AppCompatActivity() {
 
         var logged_in: Boolean = true
 
-        if (logged_in) {
-            startActivity(myIntent)
-            killActivity()
-        }
+//        if (logged_in) {
+//            startActivity(myIntent)
+//            killActivity()
+//        }
 
         setTheme(R.style.AppThemeV2)
         super.onCreate(savedInstanceState)
@@ -58,6 +59,7 @@ class MainActivity : AppCompatActivity() {
         val date: TextView = header.findViewById(R.id.fecha_hoy)
         date.text = CustomDate.getCompleteDate()
 
+        //setupAdd()
 //        val isp_id: TextView = header.findViewById(R.id.isp_id_navheader)
 //        isp_id.text = getSharedPreferences("isp_information", Context.MODE_PRIVATE).getString("isp_id", "")
 
@@ -83,7 +85,7 @@ class MainActivity : AppCompatActivity() {
     }
     override fun onSupportNavigateUp(): Boolean {
         val navController = findNavController(R.id.nav_host_fragment)
-        mInterstitialAd.loadAd(AdRequest.Builder().build())
+        //mInterstitialAd.loadAd(AdRequest.Builder().build())
         return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
     }
 

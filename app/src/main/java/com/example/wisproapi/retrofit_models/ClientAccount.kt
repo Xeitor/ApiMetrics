@@ -3,6 +3,7 @@ package com.example.wisproapi.retrofit_models
 import com.google.gson.annotations.SerializedName
 
 class ClientAccount {
+    @SerializedName("success") val success: Boolean? = null
     @SerializedName("data") val data: ClientData? = null
     @SerializedName("errors") val errors: List<String>? = null
 }
